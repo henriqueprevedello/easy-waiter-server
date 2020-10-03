@@ -1,1 +1,1 @@
-# easywaiterclient
+# easy waiter server
