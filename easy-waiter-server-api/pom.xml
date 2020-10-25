@@ -1,0 +1,227 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>br.com.easywaiter.server</groupId>
+		<artifactId>easy-waiter-server</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>easy-waiter-server-api</artifactId>
+	<groupId>br.com.easywaiter.server.api</groupId>
+	<name>EasyWaiterServerApi</name>
+	<description>Inicialização do EasyWaiterServer</description>
+
+	<properties>
+		<start-class>easy-waiter-server.Application</start-class>
+	</properties>
+
+	<dependencies>
+
+		<!-- dependências internas -->
+		<dependency>
+			<artifactId>easy-waiter-server-repository</artifactId>
+			<groupId>br.com.easywaiter.server.repository</groupId>
+			<version>${br.com.easywaiter.server.version}</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<artifactId>easy-waiter-server-service</artifactId>
+			<groupId>br.com.easywaiter.server.service</groupId>
+			<version>${br.com.easywaiter.server.version}</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<artifactId>easy-waiter-server-util</artifactId>
+			<groupId>br.com.easywaiter.server.util</groupId>
+			<version>${br.com.easywaiter.server.version}</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+
+
+		<!-- Dependência de JODATIME, necessária a partir da 2.3.1 do Spring Boot -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.10.6</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- outras dependências -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- Conexão com banco de dados -->
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
+		<!-- spring boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt</artifactId>
+		    <version>0.9.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>config/</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+		
+		
+		
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+
+				<configuration>
+					<mainClass>${start-class}</mainClass>
+					<addResources>true</addResources>
+					<excludeDevtools>true</excludeDevtools>
+					<layout>ZIP</layout>
+
+					<excludes>
+
+						<exclude>
+							<artifactId>easy-waiter-server-repository</artifactId>
+							<groupId>br.com.easywaiter.server.repository</groupId>
+						</exclude>
+
+						<exclude>
+							<artifactId>easy-waiter-server-service</artifactId>
+							<groupId>br.com.easywaiter.server.service</groupId>
+						</exclude>
+
+						<exclude>
+							<artifactId>easy-waiter-server-util</artifactId>
+							<groupId>br.com.easywaiter.server.util</groupId>
+						</exclude>
+
+
+
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.0</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+
+</project>                                                                                                     
