@@ -1,1 +1,1 @@
-# easy waiter server
+# EasyWaiter Server
