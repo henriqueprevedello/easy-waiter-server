@@ -13,9 +13,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import br.com.easywaiter.server.repository.jpa.UsuarioRepository;
 
 @EnableWebSecurity
 @Configuration
@@ -23,6 +26,12 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private AutenticacaoService autenticacaoService;
+	
+	@Autowired
+	private TokenService tokenService;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	@Bean
 	@Override
@@ -41,7 +50,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/autenticacao").permitAll().anyRequest().authenticated()
 				.and().cors().configurationSource(this.corsBuilder()).and().csrf().disable().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().addFilterBefore(new AutenticacaoPorTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
 
 	}
 
