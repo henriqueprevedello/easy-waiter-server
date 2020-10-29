@@ -13,8 +13,6 @@ public class UsuarioDTO {
 	
 	String nome;
 	
-	String telefone;
-	
-	String endereco;
+	String token;
 	
 }

@@ -3,7 +3,6 @@ package br.com.easywaiter.server.configuration;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import br.com.easywaiter.server.repository.domain.Usuario;
@@ -20,9 +19,7 @@ public class TokenService {
 	@Value("${ews.jwt.secret}")
 	private String secret;
 
-	public String gerar(Authentication authentication) {
-
-		Usuario usuario = (Usuario) authentication.getPrincipal();
+	public String gerar(Usuario usuario) {
 
 		Date agora = new Date();
 
@@ -32,12 +29,12 @@ public class TokenService {
 	}
 
 	public boolean valido(String token) {
-		try {			
+		try {
 			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
-			
+
 			return true;
 		} catch (Exception e) {
-			
+
 			return false;
 		}
 	}
@@ -45,7 +42,7 @@ public class TokenService {
 	public Long getIdUsuario(String token) {
 
 		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
-		
+
 		return Long.parseLong(claims.getSubject());
 	}
 

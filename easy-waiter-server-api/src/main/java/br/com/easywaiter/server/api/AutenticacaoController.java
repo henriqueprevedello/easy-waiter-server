@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.easywaiter.server.util.dto.AutenticacaoDTO;
-import br.com.easywaiter.server.util.dto.TokenDTO;
+import br.com.easywaiter.server.util.dto.UsuarioDTO;
 
 @RequestMapping(value = "/autenticacao")
 public interface AutenticacaoController {
 
 	@PostMapping
-	public ResponseEntity<TokenDTO> login(@RequestBody AutenticacaoDTO autenticacaoDTO);
+	public ResponseEntity<UsuarioDTO> login(@RequestBody AutenticacaoDTO autenticacaoDTO);
 
 }

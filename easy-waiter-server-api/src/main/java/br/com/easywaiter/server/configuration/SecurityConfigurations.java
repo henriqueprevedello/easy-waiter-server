@@ -25,7 +25,7 @@ import br.com.easywaiter.server.repository.jpa.UsuarioRepository;
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private AutenticacaoService autenticacaoService;
+	private UserDetailsServiceImpl userDetailsService;
 	
 	@Autowired
 	private TokenService tokenService;
@@ -42,7 +42,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override

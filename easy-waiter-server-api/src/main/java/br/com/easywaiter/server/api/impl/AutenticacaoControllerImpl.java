@@ -1,5 +1,6 @@
 package br.com.easywaiter.server.api.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easywaiter.server.api.AutenticacaoController;
 import br.com.easywaiter.server.configuration.TokenService;
+import br.com.easywaiter.server.repository.domain.Usuario;
 import br.com.easywaiter.server.util.dto.AutenticacaoDTO;
-import br.com.easywaiter.server.util.dto.TokenDTO;
+import br.com.easywaiter.server.util.dto.UsuarioDTO;
 
 @RestController
 public class AutenticacaoControllerImpl implements AutenticacaoController {
@@ -22,8 +24,11 @@ public class AutenticacaoControllerImpl implements AutenticacaoController {
 	@Autowired
 	private TokenService tokenService;
 
+	@Autowired
+	private ModelMapper modelMapper;
+
 	@Override
-	public ResponseEntity<TokenDTO> login(AutenticacaoDTO autenticacaoDTO) {
+	public ResponseEntity<UsuarioDTO> login(AutenticacaoDTO autenticacaoDTO) {
 
 		UsernamePasswordAuthenticationToken dadosLogin = new UsernamePasswordAuthenticationToken(
 				autenticacaoDTO.getEmail(), autenticacaoDTO.getSenha());
@@ -32,9 +37,15 @@ public class AutenticacaoControllerImpl implements AutenticacaoController {
 
 			Authentication authentication = authManager.authenticate(dadosLogin);
 
-			String token = tokenService.gerar(authentication);
+			Usuario usuario = (Usuario) authentication.getPrincipal();
 
-			return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
+			String token = tokenService.gerar(usuario);
+
+			UsuarioDTO usuarioDTO = modelMapper.map(usuario, UsuarioDTO.class);
+
+			usuarioDTO.setToken(token);
+
+			return ResponseEntity.ok(usuarioDTO);
 
 		} catch (AuthenticationException e) {
 
