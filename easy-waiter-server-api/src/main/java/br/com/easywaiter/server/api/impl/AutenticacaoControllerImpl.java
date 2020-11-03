@@ -1,6 +1,5 @@
 package br.com.easywaiter.server.api.impl;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,9 +23,6 @@ public class AutenticacaoControllerImpl implements AutenticacaoController {
 	@Autowired
 	private TokenService tokenService;
 
-	@Autowired
-	private ModelMapper modelMapper;
-
 	@Override
 	public ResponseEntity<UsuarioDTO> login(AutenticacaoDTO autenticacaoDTO) {
 
@@ -41,7 +37,9 @@ public class AutenticacaoControllerImpl implements AutenticacaoController {
 
 			String token = tokenService.gerar(usuario);
 
-			UsuarioDTO usuarioDTO = modelMapper.map(usuario, UsuarioDTO.class);
+			UsuarioDTO usuarioDTO = new UsuarioDTO();
+			usuarioDTO.setNome(usuario.getNome());
+			usuarioDTO.setEmail(usuario.getEmail());
 
 			usuarioDTO.setToken(token);
 

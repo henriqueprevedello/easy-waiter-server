@@ -2,6 +2,8 @@ package br.com.easywaiter.server.configuration;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +46,21 @@ public class TokenService {
 		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
 
 		return Long.parseLong(claims.getSubject());
+	}
+
+	public String adquirirToken(HttpServletRequest request) {
+		String token = request.getHeader("Authorization");
+
+		return this.adquirirToken(token);
+	}
+
+	public String adquirirToken(String token) {
+
+		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
+			return null;
+		}
+
+		return token.substring(7, token.length());
 	}
 
 }

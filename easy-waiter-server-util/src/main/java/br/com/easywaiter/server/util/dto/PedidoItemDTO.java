@@ -1,14 +1,15 @@
 package br.com.easywaiter.server.util.dto;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AutenticacaoDTO {
+public class PedidoItemDTO {
 
-	private String email;
+	private ProdutoDTO produto;
 
-	private String senha;
+	private Long quantidade;
 
 }

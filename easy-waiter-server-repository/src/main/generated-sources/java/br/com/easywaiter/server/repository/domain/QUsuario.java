@@ -18,9 +18,15 @@ public class QUsuario extends EntityPathBase<Usuario> {
 
     private static final long serialVersionUID = 886027996L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QUsuario usuario = new QUsuario("usuario");
 
+    public final QCliente cliente;
+
     public final StringPath email = createString("email");
+
+    public final QEstabelecimento estabelecimento;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -31,15 +37,25 @@ public class QUsuario extends EntityPathBase<Usuario> {
     public final StringPath senha = createString("senha");
 
     public QUsuario(String variable) {
-        super(Usuario.class, forVariable(variable));
+        this(Usuario.class, forVariable(variable), INITS);
     }
 
     public QUsuario(Path<? extends Usuario> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QUsuario(PathMetadata metadata) {
-        super(Usuario.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QUsuario(PathMetadata metadata, PathInits inits) {
+        this(Usuario.class, metadata, inits);
+    }
+
+    public QUsuario(Class<? extends Usuario> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.cliente = inits.isInitialized("cliente") ? new QCliente(forProperty("cliente"), inits.get("cliente")) : null;
+        this.estabelecimento = inits.isInitialized("estabelecimento") ? new QEstabelecimento(forProperty("estabelecimento"), inits.get("estabelecimento")) : null;
     }
 
 }
