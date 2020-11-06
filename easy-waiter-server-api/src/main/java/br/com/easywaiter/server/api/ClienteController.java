@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.easywaiter.server.util.dto.PedidoDTO;
+import br.com.easywaiter.server.util.dto.UsuarioDTO;
 
-@RequestMapping(value = "/pedido")
-public interface PedidoController {
+@RequestMapping(value = "/cliente")
+public interface ClienteController {
 
 	@PostMapping
-	public ResponseEntity<Void> adicionar(@RequestBody PedidoDTO pedidoDTO);
+	public ResponseEntity<Void> cadastrar(@RequestBody UsuarioDTO usuarioDTO);
 
 }

@@ -22,11 +22,15 @@ public class QEstabelecimento extends EntityPathBase<Estabelecimento> {
 
     public static final QEstabelecimento estabelecimento = new QEstabelecimento("estabelecimento");
 
+    public final StringPath cidade = createString("cidade");
+
     public final StringPath cnpj = createString("cnpj");
 
     public final NumberPath<Long> codigoUsuario = createNumber("codigoUsuario", Long.class);
 
     public final StringPath descricao = createString("descricao");
+
+    public final StringPath estado = createString("estado");
 
     public final ArrayPath<byte[], Byte> imagem = createArray("imagem", byte[].class);
 

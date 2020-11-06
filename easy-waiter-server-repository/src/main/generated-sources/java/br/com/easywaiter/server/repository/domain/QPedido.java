@@ -26,6 +26,8 @@ public class QPedido extends EntityPathBase<Pedido> {
 
     public final QComanda comanda;
 
+    public final DateTimePath<java.util.Date> dataCadastro = createDateTime("dataCadastro", java.util.Date.class);
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final ListPath<PedidoItem, QPedidoItem> pedidosItem = this.<PedidoItem, QPedidoItem>createList("pedidosItem", PedidoItem.class, QPedidoItem.class, PathInits.DIRECT2);

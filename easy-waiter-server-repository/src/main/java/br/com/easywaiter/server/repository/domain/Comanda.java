@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -32,6 +33,13 @@ public class Comanda implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_comanda", nullable = false)
 	private Long id;
+
+	@Column(name = "cd_mesa", nullable = false)
+	private Long codigoMesa;
+
+	@OneToOne
+	@JoinColumn(name = "cd_mesa", referencedColumnName = "id_mesa", nullable = false, insertable = false, updatable = false)
+	private Mesa mesa;
 
 	@Column(name = "cd_cliente", nullable = false)
 	private Long codigoCliente;

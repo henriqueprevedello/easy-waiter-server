@@ -21,13 +21,13 @@ import lombok.Setter;
 @Entity(name = "tb_estabelecimento")
 public class Estabelecimento implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "cd_usuario", nullable = false)
 	private Long codigoUsuario;
 
-    @OneToOne
-    @JoinColumn(name = "cd_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	@OneToOne
+	@JoinColumn(name = "cd_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
 	private Usuario usuario;
 
 	private String descricao;
@@ -36,10 +36,17 @@ public class Estabelecimento implements Serializable {
 
 	private String cnpj;
 
+	private String estado;
+
+	private String cidade;
+
 	@Lob
 	private byte[] imagem;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "estabelecimento", fetch = FetchType.LAZY)
 	private List<Produto> produtos = new ArrayList<>();
+
+	@OneToMany(mappedBy = "estabelecimento", fetch = FetchType.LAZY)
+	private List<Mesa> mesas = new ArrayList<>();
 
 }

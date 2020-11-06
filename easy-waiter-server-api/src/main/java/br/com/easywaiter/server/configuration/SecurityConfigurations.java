@@ -25,11 +25,11 @@ import br.com.easywaiter.server.repository.jpa.UsuarioRepository;
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
-	
+	private AutenticacaoService autenticacaoService;
+
 	@Autowired
 	private TokenService tokenService;
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
@@ -41,16 +41,18 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+
+		auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/autenticacao").permitAll().anyRequest().authenticated()
-				.and().cors().configurationSource(this.corsBuilder()).and().csrf().disable().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().addFilterBefore(new AutenticacaoPorTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/autenticacao", "/cliente").permitAll().anyRequest()
+				.authenticated().and().cors().configurationSource(this.corsBuilder()).and().csrf().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.addFilterBefore(new AutenticacaoPorTokenFilter(tokenService, usuarioRepository),
+						UsernamePasswordAuthenticationFilter.class);
 
 	}
 
@@ -64,5 +66,5 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		source.registerCorsConfiguration("/**", cors);
 		return source;
 	}
-	
+
 }

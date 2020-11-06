@@ -11,4 +11,8 @@ public class PedidoDTO {
 
 	private List<PedidoItemDTO> pedidosItem;
 
+	private Long codigoCliente;
+
+	private Long codigoEstabelecimento;
+
 }

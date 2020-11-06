@@ -36,6 +36,8 @@ public class QComanda extends EntityPathBase<Comanda> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final StringPath mesa = createString("mesa");
+
     public final ListPath<Pedido, QPedido> pedidos = this.<Pedido, QPedido>createList("pedidos", Pedido.class, QPedido.class, PathInits.DIRECT2);
 
     public QComanda(String variable) {

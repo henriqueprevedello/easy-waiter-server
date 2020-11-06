@@ -23,13 +23,14 @@ public class PedidoServiceImpl implements PedidoService {
 	private ComandaService comandaService;
 
 	@Override
-	public void adicionar(PedidoDTO pedidoDTO, Long codigoUsuario) {
+	public void adicionar(PedidoDTO pedidoDTO) {
 
 		Pedido pedido = new Pedido();
 
 		pedido = modelMapper.map(pedidoDTO, Pedido.class);
 
-		pedido.setCodigoComanda(comandaService.adquirirOuAbrir(codigoUsuario).getId());
+		pedido.setCodigoComanda(comandaService
+				.adquirirOuAbrir(pedidoDTO.getCodigoCliente(), pedidoDTO.getCodigoEstabelecimento()).getId());
 
 		pedidoRepository.save(pedido);
 	}
