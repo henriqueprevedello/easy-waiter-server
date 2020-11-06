@@ -53,7 +53,7 @@ public class QPedidoItem extends EntityPathBase<PedidoItem> {
     public QPedidoItem(Class<? extends PedidoItem> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.pedido = inits.isInitialized("pedido") ? new QPedido(forProperty("pedido"), inits.get("pedido")) : null;
-        this.produto = inits.isInitialized("produto") ? new QProduto(forProperty("produto")) : null;
+        this.produto = inits.isInitialized("produto") ? new QProduto(forProperty("produto"), inits.get("produto")) : null;
     }
 
 }

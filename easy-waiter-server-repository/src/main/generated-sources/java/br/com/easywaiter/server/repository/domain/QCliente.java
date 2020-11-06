@@ -22,7 +22,7 @@ public class QCliente extends EntityPathBase<Cliente> {
 
     public static final QCliente cliente = new QCliente("cliente");
 
-    public final NumberPath<Long> codigoUsuario = createNumber("codigoUsuario", Long.class);
+    public final NumberPath<Long> codigoCliente = createNumber("codigoCliente", Long.class);
 
     public final QUsuario usuario;
 

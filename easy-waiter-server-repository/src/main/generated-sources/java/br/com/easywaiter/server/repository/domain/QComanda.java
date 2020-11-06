@@ -28,6 +28,8 @@ public class QComanda extends EntityPathBase<Comanda> {
 
     public final NumberPath<Long> codigoEstabelecimento = createNumber("codigoEstabelecimento", Long.class);
 
+    public final NumberPath<Long> codigoMesa = createNumber("codigoMesa", Long.class);
+
     public final DateTimePath<java.util.Date> dataAbertura = createDateTime("dataAbertura", java.util.Date.class);
 
     public final DateTimePath<java.util.Date> dataFechamento = createDateTime("dataFechamento", java.util.Date.class);
@@ -36,7 +38,7 @@ public class QComanda extends EntityPathBase<Comanda> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath mesa = createString("mesa");
+    public final QMesa mesa;
 
     public final ListPath<Pedido, QPedido> pedidos = this.<Pedido, QPedido>createList("pedidos", Pedido.class, QPedido.class, PathInits.DIRECT2);
 
@@ -60,6 +62,7 @@ public class QComanda extends EntityPathBase<Comanda> {
         super(type, metadata, inits);
         this.cliente = inits.isInitialized("cliente") ? new QCliente(forProperty("cliente"), inits.get("cliente")) : null;
         this.estabelecimento = inits.isInitialized("estabelecimento") ? new QEstabelecimento(forProperty("estabelecimento"), inits.get("estabelecimento")) : null;
+        this.mesa = inits.isInitialized("mesa") ? new QMesa(forProperty("mesa"), inits.get("mesa")) : null;
     }
 
 }

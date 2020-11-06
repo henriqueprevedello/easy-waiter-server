@@ -20,7 +20,7 @@ public class Cliente implements Serializable {
 
 	@Id
 	@Column(name = "cd_usuario", nullable = false)
-	private Long codigoUsuario;
+	private Long codigoCliente;
 
 	@OneToOne
 	@JoinColumn(name = "cd_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)

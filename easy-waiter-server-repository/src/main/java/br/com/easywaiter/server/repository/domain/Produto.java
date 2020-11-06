@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,5 +37,12 @@ public class Produto implements Serializable {
 
 	@Lob
 	private byte[] imagem;
+
+	@Column(name = "cd_estabelecimento", nullable = false)
+	private Long codigoEstabelecimento;
+
+	@ManyToOne
+	@JoinColumn(name = "cd_estabelecimento", referencedColumnName = "cd_usuario", nullable = false, insertable = false, updatable = false)
+	private Estabelecimento estabelecimento;
 
 }

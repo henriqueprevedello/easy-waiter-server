@@ -13,11 +13,15 @@ import br.com.easywaiter.server.util.dto.LocalizacaoDTO;
 @RequestMapping(value = "/estabelecimento")
 public interface EstabelecimentoController {
 
+	@GetMapping
+	public ResponseEntity<EstabelecimentoDTO> adquirir(
+			@RequestParam(name = "codigoEstabelecimento") Long codigoEstabelecimento);
+
 	@GetMapping(path = "/adquirirLocalizacoes")
 	public ResponseEntity<List<LocalizacaoDTO>> adquirirLocalizacoes();
 
 	@GetMapping(path = "/adquirirPorLocalizacao")
-	public ResponseEntity<List<EstabelecimentoDTO>> adquirirPorLocalizacao(
-			@RequestParam(name = "cidade") String cidade);
+	public ResponseEntity<List<EstabelecimentoDTO>> adquirirPorLocalizacao(@RequestParam(name = "cidade") String cidade,
+			@RequestParam(name = "estado") String estado);
 
 }

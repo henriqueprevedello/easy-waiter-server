@@ -63,6 +63,14 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-security</artifactId>
 	</dependency>
+	
+			<dependency>
+			<artifactId>easy-waiter-server-util</artifactId>
+			<groupId>br.com.easywaiter.server.util</groupId>
+			<version>${br.com.easywaiter.server.version}</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
                                                                                                                  
 </dependencies>                                                                                             
                                                                                                                  

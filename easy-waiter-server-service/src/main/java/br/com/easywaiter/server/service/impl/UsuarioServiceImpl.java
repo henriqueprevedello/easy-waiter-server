@@ -31,7 +31,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuario = usuarioRepository.save(usuario);
 
 		Cliente cliente = new Cliente();
-		cliente.setCodigoUsuario(usuario.getId());
+		cliente.setCodigoCliente(usuario.getId());
 
 		clienteRepository.save(cliente);
 

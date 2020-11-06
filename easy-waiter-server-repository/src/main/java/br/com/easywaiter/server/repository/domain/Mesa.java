@@ -32,7 +32,7 @@ public class Mesa implements Serializable {
 	private Long codigoEstabelecimento;
 
 	@ManyToOne
-	@JoinColumn(name = "cd_estabelecimento", referencedColumnName = "id_estabelecimento", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "cd_estabelecimento", referencedColumnName = "cd_usuario", nullable = false, insertable = false, updatable = false)
 	private Estabelecimento estabelecimento;
 
 }

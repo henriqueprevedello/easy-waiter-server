@@ -26,13 +26,15 @@ public class QEstabelecimento extends EntityPathBase<Estabelecimento> {
 
     public final StringPath cnpj = createString("cnpj");
 
-    public final NumberPath<Long> codigoUsuario = createNumber("codigoUsuario", Long.class);
+    public final NumberPath<Long> codigoEstabelecimento = createNumber("codigoEstabelecimento", Long.class);
 
     public final StringPath descricao = createString("descricao");
 
     public final StringPath estado = createString("estado");
 
     public final ArrayPath<byte[], Byte> imagem = createArray("imagem", byte[].class);
+
+    public final ListPath<Mesa, QMesa> mesas = this.<Mesa, QMesa>createList("mesas", Mesa.class, QMesa.class, PathInits.DIRECT2);
 
     public final StringPath numeroTelefone = createString("numeroTelefone");
 

@@ -7,6 +7,18 @@ import lombok.Setter;
 @Setter
 public class EstabelecimentoDTO {
 
+	private Long codigoEstabelecimento;
+
 	private String nome;
+
+	private String descricao;
+
+	private String numeroTelefone;
+
+	private String cnpj;
+
+	private String estado;
+
+	private String cidade;
 
 }

@@ -2,8 +2,11 @@ package br.com.easywaiter.server.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.reflect.TypeToken;
 
 import br.com.easywaiter.server.repository.domain.Produto;
 import br.com.easywaiter.server.repository.jpa.ProdutoRepository;
@@ -15,6 +18,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
+
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Override
 	public void adicionar(ProdutoDTO produtoDTO) {
@@ -29,9 +35,11 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}
 
 	@Override
-	public List<Produto> adquirirTodos() {
-		
-		return produtoRepository.findAll();
+	public List<ProdutoDTO> adquirirTodos() {
+
+		return modelMapper.map(produtoRepository.findAll(),
+				TypeToken.getParameterized(List.class, ProdutoDTO.class).getType());
+
 	}
 
 }
