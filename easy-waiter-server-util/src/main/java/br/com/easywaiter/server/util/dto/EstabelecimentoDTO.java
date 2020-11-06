@@ -1,5 +1,8 @@
 package br.com.easywaiter.server.util.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,5 +23,11 @@ public class EstabelecimentoDTO {
 	private String estado;
 
 	private String cidade;
+
+	private List<ProdutoDTO> produtos = new ArrayList<>();
+
+	private List<CategoriaDTO> categorias = new ArrayList<>();
+
+	private List<MesaDTO> mesas = new ArrayList<>();
 
 }

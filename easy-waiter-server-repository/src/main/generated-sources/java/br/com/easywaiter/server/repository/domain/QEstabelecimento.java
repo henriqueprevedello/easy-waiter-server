@@ -22,6 +22,8 @@ public class QEstabelecimento extends EntityPathBase<Estabelecimento> {
 
     public static final QEstabelecimento estabelecimento = new QEstabelecimento("estabelecimento");
 
+    public final ListPath<Categoria, QCategoria> categorias = this.<Categoria, QCategoria>createList("categorias", Categoria.class, QCategoria.class, PathInits.DIRECT2);
+
     public final StringPath cidade = createString("cidade");
 
     public final StringPath cnpj = createString("cnpj");

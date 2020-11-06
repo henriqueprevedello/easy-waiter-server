@@ -47,6 +47,9 @@ public class Estabelecimento implements Serializable {
 	private List<Produto> produtos = new ArrayList<>();
 
 	@OneToMany(mappedBy = "estabelecimento", fetch = FetchType.LAZY)
+	private List<Categoria> categorias = new ArrayList<>();
+
+	@OneToMany(mappedBy = "estabelecimento", fetch = FetchType.LAZY)
 	private List<Mesa> mesas = new ArrayList<>();
 
 }

@@ -24,6 +24,10 @@ public class QProduto extends EntityPathBase<Produto> {
 
     public final BooleanPath ativo = createBoolean("ativo");
 
+    public final QCategoria categoria;
+
+    public final NumberPath<Long> codigoCategoria = createNumber("codigoCategoria", Long.class);
+
     public final NumberPath<Long> codigoEstabelecimento = createNumber("codigoEstabelecimento", Long.class);
 
     public final StringPath descricao = createString("descricao");
@@ -56,6 +60,7 @@ public class QProduto extends EntityPathBase<Produto> {
 
     public QProduto(Class<? extends Produto> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.categoria = inits.isInitialized("categoria") ? new QCategoria(forProperty("categoria"), inits.get("categoria")) : null;
         this.estabelecimento = inits.isInitialized("estabelecimento") ? new QEstabelecimento(forProperty("estabelecimento"), inits.get("estabelecimento")) : null;
     }
 
