@@ -48,9 +48,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/autenticacao", "/cliente").permitAll().anyRequest()
-				.authenticated().and().cors().configurationSource(this.corsBuilder()).and().csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/autenticacao", "/cliente").permitAll()
+				.antMatchers(HttpMethod.GET, "/conexao").permitAll().anyRequest().authenticated().and().cors()
+				.configurationSource(this.corsBuilder()).and().csrf().disable().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new AutenticacaoPorTokenFilter(tokenService, usuarioRepository),
 						UsernamePasswordAuthenticationFilter.class);
 

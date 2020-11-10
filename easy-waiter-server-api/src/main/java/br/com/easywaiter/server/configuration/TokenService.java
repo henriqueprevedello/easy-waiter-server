@@ -41,6 +41,13 @@ public class TokenService {
 		}
 	}
 
+	public Long getIdUsuarioPorHeader(String header) {
+
+		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(this.adquirirToken(header)).getBody();
+
+		return Long.parseLong(claims.getSubject());
+	}
+
 	public Long getIdUsuario(String token) {
 
 		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
@@ -54,13 +61,13 @@ public class TokenService {
 		return this.adquirirToken(token);
 	}
 
-	public String adquirirToken(String token) {
+	private String adquirirToken(String header) {
 
-		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
+		if (header == null || header.isEmpty() || !header.startsWith("Bearer ")) {
 			return null;
 		}
 
-		return token.substring(7, token.length());
+		return header.substring(7, header.length());
 	}
 
 }

@@ -19,4 +19,6 @@ public class ProdutoDTO {
 
 	private Boolean ativo;
 
+	private CategoriaDTO categoria;
+
 }

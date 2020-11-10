@@ -1,5 +1,7 @@
 package br.com.easywaiter.server.api.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +23,25 @@ public class CategoriaControllerImpl implements CategoriaController {
 	@Override
 	public ResponseEntity<Void> cadastrar(CategoriaDTO categoriaDTO, String token) {
 
-		categoriaService.cadastrar(categoriaDTO, tokenService.getIdUsuario(token));
+		categoriaService.cadastrar(categoriaDTO, tokenService.getIdUsuarioPorHeader(token));
 
 		return ResponseEntity.ok().build();
 
+	}
+
+	@Override
+	public ResponseEntity<List<CategoriaDTO>> adquirirPorEstabelecimento(String token) {
+
+		return ResponseEntity
+				.ok(categoriaService.adquirirPorEstabelecimento(tokenService.getIdUsuarioPorHeader(token)));
+	}
+
+	@Override
+	public ResponseEntity<Void> editar(CategoriaDTO categoriaDTO) throws Exception {
+
+		categoriaService.editar(categoriaDTO);
+
+		return ResponseEntity.ok().build();
 	}
 
 }
