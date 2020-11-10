@@ -6,7 +6,7 @@ import br.com.easywaiter.server.util.dto.ProdutoDTO;
 
 public interface ProdutoService {
 
-	void adicionar(ProdutoDTO produtoDTO);
+	void adicionar(ProdutoDTO produtoDTO, Long codigoEstabelecimento);
 
 	List<ProdutoDTO> adquirirTodos();
 

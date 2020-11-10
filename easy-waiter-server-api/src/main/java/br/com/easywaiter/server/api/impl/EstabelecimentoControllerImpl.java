@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easywaiter.server.api.EstabelecimentoController;
+import br.com.easywaiter.server.configuration.TokenService;
 import br.com.easywaiter.server.service.EstabelecimentoService;
 import br.com.easywaiter.server.util.dto.EstabelecimentoDTO;
 import br.com.easywaiter.server.util.dto.LocalizacaoDTO;
@@ -17,10 +18,19 @@ public class EstabelecimentoControllerImpl implements EstabelecimentoController 
 	@Autowired
 	private EstabelecimentoService estabelecimentoService;
 
-	@Override
-	public ResponseEntity<EstabelecimentoDTO> adquirir(Long codigoEstabelecimento) {
+	@Autowired
+	private TokenService tokenService;
 
-		return ResponseEntity.ok(estabelecimentoService.adquirir(codigoEstabelecimento));
+	@Override
+	public ResponseEntity<EstabelecimentoDTO> editar(EstabelecimentoDTO estabelecimentoDTO) throws Exception {
+
+		return ResponseEntity.ok(estabelecimentoService.editar(estabelecimentoDTO));
+	}
+
+	@Override
+	public ResponseEntity<EstabelecimentoDTO> adquirir(String token) {
+
+		return ResponseEntity.ok(estabelecimentoService.adquirir(tokenService.getIdUsuarioPorHeader(token)));
 	}
 
 	@Override

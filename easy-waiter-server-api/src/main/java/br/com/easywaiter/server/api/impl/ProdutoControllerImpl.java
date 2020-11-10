@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easywaiter.server.api.ProdutoController;
+import br.com.easywaiter.server.configuration.TokenService;
 import br.com.easywaiter.server.service.ProdutoService;
 import br.com.easywaiter.server.util.dto.ProdutoDTO;
 
@@ -16,10 +17,13 @@ public class ProdutoControllerImpl implements ProdutoController {
 	@Autowired
 	private ProdutoService produtoService;
 
-	@Override
-	public ResponseEntity<Void> adicionar(ProdutoDTO produtoDTO) {
+	@Autowired
+	private TokenService tokenService;
 
-		produtoService.adicionar(produtoDTO);
+	@Override
+	public ResponseEntity<Void> adicionar(ProdutoDTO produtoDTO, String token) {
+
+		produtoService.adicionar(produtoDTO, tokenService.getIdUsuarioPorHeader(token));
 
 		return ResponseEntity.ok().build();
 	}

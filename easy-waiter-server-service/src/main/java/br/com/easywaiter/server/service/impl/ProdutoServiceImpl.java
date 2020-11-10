@@ -23,7 +23,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public void adicionar(ProdutoDTO produtoDTO) {
+	public void adicionar(ProdutoDTO produtoDTO, Long codigoEstabelecimento) {
 
 		Produto produto = new Produto();
 		produto.setNome(produtoDTO.getNome());
@@ -31,6 +31,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		produto.setValor(produtoDTO.getValor());
 		produto.setAtivo(produtoDTO.getAtivo());
 		produto.setCodigoCategoria(produtoDTO.getCategoria().getId());
+		produto.setCodigoEstabelecimento(codigoEstabelecimento);
 
 		produtoRepository.save(produto);
 	}

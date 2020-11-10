@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.easywaiter.server.util.dto.ProdutoDTO;
@@ -14,8 +15,9 @@ import br.com.easywaiter.server.util.dto.ProdutoDTO;
 public interface ProdutoController {
 
 	@PostMapping
-	public ResponseEntity<Void> adicionar(@RequestBody ProdutoDTO produtoDTO);
-	
+	public ResponseEntity<Void> adicionar(@RequestBody ProdutoDTO produtoDTO,
+			@RequestHeader(name = "Authorization") String token);
+
 	@GetMapping
 	public ResponseEntity<List<ProdutoDTO>> adquirirTodos();
 

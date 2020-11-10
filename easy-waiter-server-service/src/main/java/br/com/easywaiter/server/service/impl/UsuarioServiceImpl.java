@@ -1,5 +1,7 @@
 package br.com.easywaiter.server.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 		cliente.setCodigoCliente(usuario.getId());
 
 		clienteRepository.save(cliente);
+
+	}
+
+	@Override
+	public void editarNome(String nome, Long codigoUsuario) throws Exception {
+
+		Optional<Usuario> optionalUsuario = usuarioRepository.findById(codigoUsuario);
+
+		if (!optionalUsuario.isPresent()) {
+			throw new Exception("Usuário não encontrado!");
+		}
+
+		Usuario usuario = optionalUsuario.get();
+		usuario.setNome(nome);
+
+		usuarioRepository.save(usuario);
 
 	}
 

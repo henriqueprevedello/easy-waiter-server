@@ -30,8 +30,6 @@ public class QCategoria extends EntityPathBase<Categoria> {
 
     public final StringPath nome = createString("nome");
 
-    public final ListPath<Produto, QProduto> produtos = this.<Produto, QProduto>createList("produtos", Produto.class, QProduto.class, PathInits.DIRECT2);
-
     public QCategoria(String variable) {
         this(Categoria.class, forVariable(variable), INITS);
     }

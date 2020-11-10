@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import br.com.easywaiter.server.repository.domain.Estabelecimento;
 import br.com.easywaiter.server.repository.jpa.EstabelecimentoRepository;
 import br.com.easywaiter.server.service.EstabelecimentoService;
+import br.com.easywaiter.server.service.UsuarioService;
 import br.com.easywaiter.server.util.dto.EstabelecimentoDTO;
 import br.com.easywaiter.server.util.dto.LocalizacaoDTO;
 
@@ -23,7 +24,31 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 	private EstabelecimentoRepository estabelecimentoRepository;
 
 	@Autowired
+	private UsuarioService usuarioService;
+
+	@Autowired
 	private ModelMapper modelMapper;
+
+	@Override
+	public EstabelecimentoDTO editar(EstabelecimentoDTO estabelecimentoDTO) throws Exception {
+
+		usuarioService.editarNome(estabelecimentoDTO.getNome(), estabelecimentoDTO.getCodigoEstabelecimento());
+
+		Optional<Estabelecimento> optionalEstabelecimento = estabelecimentoRepository
+				.findById(estabelecimentoDTO.getCodigoEstabelecimento());
+
+		if (!optionalEstabelecimento.isPresent()) {
+			throw new Exception("Não encontrado estabelecimento!");
+		}
+
+		Estabelecimento estabelecimento = optionalEstabelecimento.get();
+
+		estabelecimento.setDescricao(estabelecimentoDTO.getDescricao());
+		estabelecimento.setNumeroTelefone(estabelecimentoDTO.getNumeroTelefone());
+
+		return modelMapper.map(estabelecimentoRepository.save(estabelecimento), EstabelecimentoDTO.class);
+
+	}
 
 	@Override
 	public EstabelecimentoDTO adquirir(Long codigoEstabelecimento) {

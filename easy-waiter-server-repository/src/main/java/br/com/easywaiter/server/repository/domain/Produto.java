@@ -19,7 +19,6 @@ import lombok.Setter;
 @Setter
 @Entity(name = "tb_produto")
 public class Produto implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -7,6 +7,8 @@ import br.com.easywaiter.server.util.dto.LocalizacaoDTO;
 
 public interface EstabelecimentoService {
 
+	EstabelecimentoDTO editar(EstabelecimentoDTO estabelecimentoDTO) throws Exception;
+
 	EstabelecimentoDTO adquirir(Long codigoEstabelecimento);
 
 	List<LocalizacaoDTO> adquirirLocalizacoes();
