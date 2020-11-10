@@ -16,6 +16,7 @@ import br.com.easywaiter.server.service.EstabelecimentoService;
 import br.com.easywaiter.server.service.UsuarioService;
 import br.com.easywaiter.server.util.dto.EstabelecimentoDTO;
 import br.com.easywaiter.server.util.dto.LocalizacaoDTO;
+import br.com.easywaiter.server.util.dto.ProdutoDTO;
 
 @Service
 public class EstabelecimentoServiceImpl implements EstabelecimentoService {
@@ -54,12 +55,32 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 	public EstabelecimentoDTO adquirir(Long codigoEstabelecimento) {
 		Optional<Estabelecimento> optionalEstabelecimento = estabelecimentoRepository.findById(codigoEstabelecimento);
 
-		if (optionalEstabelecimento.isPresent()) {
-
-			return modelMapper.map(optionalEstabelecimento.get(), EstabelecimentoDTO.class);
+		if (!optionalEstabelecimento.isPresent()) {
+			return null;
 		}
 
-		return null;
+		EstabelecimentoDTO estabelecimentoDTO = modelMapper.map(optionalEstabelecimento.get(),
+				EstabelecimentoDTO.class);
+
+		estabelecimentoDTO.getCategorias().forEach(categoria -> {
+
+			List<ProdutoDTO> listaProdutos = new ArrayList<>();
+
+			estabelecimentoDTO.getProdutos().forEach(produto -> {
+
+				if (produto.getCategoria() != null && produto.getCategoria().getId().equals(categoria.getId())) {
+
+					produto.setCategoria(null);
+
+					listaProdutos.add(produto);
+				}
+
+			});
+
+			categoria.setProdutos(listaProdutos);
+		});
+
+		return estabelecimentoDTO;
 	}
 
 	@Override
@@ -88,7 +109,9 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 	@Override
 	public List<EstabelecimentoDTO> adquirirPorLocalizacao(String cidade, String estado) {
 
-		return modelMapper.map(estabelecimentoRepository.findByCidadeAndEstado(cidade, estado),
+		List<Estabelecimento> listaEstabelecimentos = estabelecimentoRepository.findByCidadeAndEstado(cidade, estado);
+
+		return modelMapper.map(listaEstabelecimentos,
 				TypeToken.getParameterized(List.class, EstabelecimentoDTO.class).getType());
 
 	}

@@ -20,6 +20,10 @@ public interface EstabelecimentoController {
 	public ResponseEntity<EstabelecimentoDTO> editar(@RequestBody EstabelecimentoDTO estabelecimentoDTO)
 			throws Exception;
 
+	@GetMapping(path = "/adquirirPorCodigo")
+	public ResponseEntity<EstabelecimentoDTO> adquirirPorCodigo(
+			@RequestParam(name = "codigoEstabelecimento") Long codigoEstabelecimento);
+
 	@GetMapping
 	public ResponseEntity<EstabelecimentoDTO> adquirir(@RequestHeader(name = "Authorization") String token);
 

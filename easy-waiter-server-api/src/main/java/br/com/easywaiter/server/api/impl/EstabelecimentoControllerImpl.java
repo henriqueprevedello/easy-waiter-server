@@ -34,6 +34,12 @@ public class EstabelecimentoControllerImpl implements EstabelecimentoController 
 	}
 
 	@Override
+	public ResponseEntity<EstabelecimentoDTO> adquirirPorCodigo(Long codigoEstabelecimento) {
+
+		return ResponseEntity.ok(estabelecimentoService.adquirir(codigoEstabelecimento));
+	}
+
+	@Override
 	public ResponseEntity<List<LocalizacaoDTO>> adquirirLocalizacoes() {
 
 		return ResponseEntity.ok(estabelecimentoService.adquirirLocalizacoes());
