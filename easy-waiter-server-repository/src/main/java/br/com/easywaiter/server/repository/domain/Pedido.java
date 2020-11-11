@@ -45,5 +45,5 @@ public class Pedido implements Serializable {
 	private Date dataCadastro;
 
 	@OneToMany(mappedBy = "pedido")
-	private List<PedidoItem> pedidosItem = new ArrayList<>();
+	private List<PedidoItem> pedidoItens = new ArrayList<>();
 }

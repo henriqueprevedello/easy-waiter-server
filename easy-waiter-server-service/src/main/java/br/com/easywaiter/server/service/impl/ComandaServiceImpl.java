@@ -16,7 +16,7 @@ public class ComandaServiceImpl implements ComandaService {
 	private ComandaRepository comandaRepository;
 
 	@Override
-	public Comanda adquirirOuAbrir(Long codigoCliente, Long codigoEstabelecimento) {
+	public Comanda adquirirOuAbrir(Long codigoCliente, Long codigoEstabelecimento, Long codigoMesa) {
 
 		Optional<Comanda> optionalComanda = comandaRepository.findByDataFechamentoIsNullAndCodigoCliente(codigoCliente);
 
@@ -28,6 +28,7 @@ public class ComandaServiceImpl implements ComandaService {
 		Comanda comanda = new Comanda();
 		comanda.setCodigoCliente(codigoCliente);
 		comanda.setCodigoEstabelecimento(codigoEstabelecimento);
+		comanda.setCodigoMesa(codigoMesa);
 
 		return comandaRepository.save(comanda);
 	}

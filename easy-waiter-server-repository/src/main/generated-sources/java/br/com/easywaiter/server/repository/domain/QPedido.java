@@ -30,7 +30,7 @@ public class QPedido extends EntityPathBase<Pedido> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final ListPath<PedidoItem, QPedidoItem> pedidosItem = this.<PedidoItem, QPedidoItem>createList("pedidosItem", PedidoItem.class, QPedidoItem.class, PathInits.DIRECT2);
+    public final ListPath<PedidoItem, QPedidoItem> pedidoItens = this.<PedidoItem, QPedidoItem>createList("pedidoItens", PedidoItem.class, QPedidoItem.class, PathInits.DIRECT2);
 
     public QPedido(String variable) {
         this(Pedido.class, forVariable(variable), INITS);

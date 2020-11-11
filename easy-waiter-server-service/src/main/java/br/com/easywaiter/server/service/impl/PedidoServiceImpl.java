@@ -22,6 +22,9 @@ public class PedidoServiceImpl implements PedidoService {
 	@Autowired
 	private ComandaService comandaService;
 
+	@Autowired
+	private PedidoItemServiceImpl pedidoItemService;
+
 	@Override
 	public void adicionar(PedidoDTO pedidoDTO) {
 
@@ -29,10 +32,10 @@ public class PedidoServiceImpl implements PedidoService {
 
 		pedido = modelMapper.map(pedidoDTO, Pedido.class);
 
-		pedido.setCodigoComanda(comandaService
-				.adquirirOuAbrir(pedidoDTO.getCodigoCliente(), pedidoDTO.getCodigoEstabelecimento()).getId());
+		pedido.setCodigoComanda(comandaService.adquirirOuAbrir(pedidoDTO.getCodigoCliente(),
+				pedidoDTO.getCodigoEstabelecimento(), pedidoDTO.getCodigoMesa()).getId());
 
-		pedidoRepository.save(pedido);
+		pedidoItemService.salvar(pedidoDTO.getPedidoItens(), pedidoRepository.save(pedido).getId());
 	}
 
 }
