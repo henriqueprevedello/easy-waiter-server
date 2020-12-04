@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class PedidoDTO {
 
+	private Long id;
+
 	private List<PedidoItemDTO> pedidoItens;
 
 	private Long codigoCliente;

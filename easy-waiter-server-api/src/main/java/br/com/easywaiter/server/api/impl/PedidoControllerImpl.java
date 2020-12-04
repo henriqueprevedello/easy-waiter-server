@@ -19,13 +19,17 @@ public class PedidoControllerImpl implements PedidoController {
 	private TokenService tokenService;
 
 	@Override
-	public ResponseEntity<Void> adicionar(PedidoDTO pedidoDTO, String token) {
+	public ResponseEntity<Long> adicionar(PedidoDTO pedidoDTO, String token) {
 
 		pedidoDTO.setCodigoCliente(tokenService.getIdUsuarioPorHeader(token));
 
-		pedidoService.adicionar(pedidoDTO);
+		return ResponseEntity.ok(pedidoService.adicionar(pedidoDTO));
+	}
 
-		return ResponseEntity.ok().build();
+	@Override
+	public ResponseEntity<PedidoDTO> adquirir(Long codigoPedido) {
+
+		return ResponseEntity.ok(pedidoService.adquirir(codigoPedido));
 	}
 
 }

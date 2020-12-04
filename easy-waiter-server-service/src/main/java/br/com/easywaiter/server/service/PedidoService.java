@@ -4,6 +4,8 @@ import br.com.easywaiter.server.util.dto.PedidoDTO;
 
 public interface PedidoService {
 
-	void adicionar(PedidoDTO pedidoDTO);
+	Long adicionar(PedidoDTO pedidoDTO);
+
+	PedidoDTO adquirir(Long codigoPedido);
 
 }
