@@ -20,7 +20,8 @@
 
 	<dependencies>
 
-		<!-- dependências internas -->
+		<!-- Dependências internas -->
+		
 		<dependency>
 			<artifactId>easy-waiter-server-repository</artifactId>
 			<groupId>br.com.easywaiter.server.repository</groupId>
@@ -45,8 +46,8 @@
 			<optional>true</optional>
 		</dependency>
 
-
-		<!-- Dependência de JODATIME, necessária a partir da 2.3.1 do Spring Boot -->
+		<!-- Dependência para o Spring Boot -->
+		
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -54,21 +55,15 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- outras dependências -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- Conexão com banco de dados -->
+		<!-- Banco de dados -->
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
 
-		<!-- spring boot -->
+		<!-- Spring boot -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -124,12 +119,6 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>io.jsonwebtoken</groupId>
-		    <artifactId>jjwt</artifactId>
-		    <version>0.9.1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -141,8 +130,19 @@
 			</exclusions>
 		</dependency>
 	
+		<!-- outras dependências -->
 		
-
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt</artifactId>
+		    <version>0.9.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 	</dependencies>
 
@@ -160,20 +160,15 @@
 
 		<plugins>
 		
-		
-		
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-
 				<configuration>
 					<mainClass>${start-class}</mainClass>
 					<addResources>true</addResources>
 					<excludeDevtools>true</excludeDevtools>
 					<layout>ZIP</layout>
-
 					<excludes>
-
 						<exclude>
 							<artifactId>easy-waiter-server-repository</artifactId>
 							<groupId>br.com.easywaiter.server.repository</groupId>
@@ -188,9 +183,6 @@
 							<artifactId>easy-waiter-server-util</artifactId>
 							<groupId>br.com.easywaiter.server.util</groupId>
 						</exclude>
-
-
-
 					</excludes>
 				</configuration>
 				<executions>
@@ -200,31 +192,11 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.0</version>
-				<executions>
-					<execution>
-						<id>default-prepare-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
+				
 			</plugin>
 
 		</plugins>
+		
 	</build>
 
-
-</project>                                                                                                     
+</project>

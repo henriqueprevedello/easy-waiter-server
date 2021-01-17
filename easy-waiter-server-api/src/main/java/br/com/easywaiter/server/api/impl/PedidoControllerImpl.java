@@ -1,5 +1,7 @@
 package br.com.easywaiter.server.api.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,12 @@ public class PedidoControllerImpl implements PedidoController {
 	public ResponseEntity<PedidoDTO> adquirir(Long codigoPedido) {
 
 		return ResponseEntity.ok(pedidoService.adquirir(codigoPedido));
+	}
+
+	@Override
+	public ResponseEntity<List<PedidoDTO>> adquirirNaoFinalizados(String token) {
+
+		return ResponseEntity.ok(pedidoService.adquirirNaoFinalizados(tokenService.getIdUsuarioPorHeader(token)));
 	}
 
 }

@@ -46,4 +46,7 @@ public class Pedido implements Serializable {
 
 	@OneToMany(mappedBy = "pedido")
 	private List<PedidoItem> pedidoItens = new ArrayList<>();
+
+	@Column(name = "cd_status")
+	private Long codigoStatus;
 }

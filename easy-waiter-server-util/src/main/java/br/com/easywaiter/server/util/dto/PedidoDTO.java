@@ -19,4 +19,6 @@ public class PedidoDTO {
 
 	private Long codigoMesa;
 
+	private Long codigoStatus;
+
 }

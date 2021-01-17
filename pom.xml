@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>                                                                                              
                                                                                                                     
 	<packaging>pom</packaging>                                                                                       
@@ -15,7 +15,7 @@
 	<artifactId>easy-waiter-server</artifactId>                                                                      
 	<version>0.0.1-SNAPSHOT</version>                                                                                     
 	<name>EasyWaiterServer</name>                                                                                      
-	<description>Projeto easy-waiter-server Modularizado</description>                                               
+	<description>Projeto EasyWaiterServer</description>                                               
                                                                                                                     
 	<properties>                                                                                                     
                                                                                                                     
