@@ -16,6 +16,7 @@ import br.com.easywaiter.server.repository.jpa.PedidoRepository;
 import br.com.easywaiter.server.service.ComandaService;
 import br.com.easywaiter.server.service.PedidoService;
 import br.com.easywaiter.server.util.dto.PedidoDTO;
+import br.com.easywaiter.server.util.dto.PedidoExporDTO;
 
 @Service
 public class PedidoServiceImpl implements PedidoService {
@@ -64,12 +65,12 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public List<PedidoDTO> adquirirNaoFinalizados(Long codigoEstabelecimento) {
+	public List<PedidoExporDTO> adquirirNaoFinalizados(Long codigoEstabelecimento) {
 
 		List<Pedido> listaPedidos = pedidoRepository
 				.adquirirNaoFinalizadosPorCodigoEstabelecimento(codigoEstabelecimento);
 
-		return modelMapper.map(listaPedidos, TypeToken.getParameterized(List.class, PedidoDTO.class).getType());
+		return modelMapper.map(listaPedidos, TypeToken.getParameterized(List.class, PedidoExporDTO.class).getType());
 	}
 
 }

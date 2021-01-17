@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.easywaiter.server.util.dto.PedidoDTO;
+import br.com.easywaiter.server.util.dto.PedidoExporDTO;
 
 @RequestMapping(value = "/pedido")
 public interface PedidoController {
@@ -23,6 +24,7 @@ public interface PedidoController {
 	public ResponseEntity<PedidoDTO> adquirir(@RequestParam(name = "codigoPedido") Long codigoPedido);
 
 	@GetMapping("/adquirirNaoFinalizados")
-	public ResponseEntity<List<PedidoDTO>> adquirirNaoFinalizados(@RequestHeader(name = "Authorization") String token);
+	public ResponseEntity<List<PedidoExporDTO>> adquirirNaoFinalizados(
+			@RequestHeader(name = "Authorization") String token);
 
 }
