@@ -1,6 +1,6 @@
 package br.com.easywaiter.server.service.impl;
 
-import static br.com.easywaiter.server.util.enumerator.StatusPedidoEnum.INICIADO;
+import static br.com.easywaiter.server.util.enumerator.StatusPedidoEnum.REALIZADO;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +17,7 @@ import br.com.easywaiter.server.service.ComandaService;
 import br.com.easywaiter.server.service.PedidoService;
 import br.com.easywaiter.server.util.dto.PedidoDTO;
 import br.com.easywaiter.server.util.dto.PedidoExporDTO;
+import br.com.easywaiter.server.util.enumerator.StatusPedidoEnum;
 
 @Service
 public class PedidoServiceImpl implements PedidoService {
@@ -43,7 +44,7 @@ public class PedidoServiceImpl implements PedidoService {
 		pedido.setCodigoComanda(comandaService.adquirirOuAbrir(pedidoDTO.getCodigoCliente(),
 				pedidoDTO.getCodigoEstabelecimento(), pedidoDTO.getCodigoMesa()).getId());
 
-		pedido.setCodigoStatus(INICIADO.getCodigo());
+		pedido.setCodigoStatus(REALIZADO.getCodigo());
 
 		Long codigoPedido = pedidoRepository.save(pedido).getId();
 
@@ -53,7 +54,7 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public PedidoDTO adquirir(Long codigoPedido) {
+	public PedidoDTO adquirirDTO(Long codigoPedido) {
 		Optional<Pedido> optionalPedido = pedidoRepository.findById(codigoPedido);
 
 		if (optionalPedido.isPresent()) {
@@ -71,6 +72,49 @@ public class PedidoServiceImpl implements PedidoService {
 				.adquirirNaoFinalizadosPorCodigoEstabelecimento(codigoEstabelecimento);
 
 		return modelMapper.map(listaPedidos, TypeToken.getParameterized(List.class, PedidoExporDTO.class).getType());
+	}
+
+	@Override
+	public void prosseguir(Long codigoPedido) throws Exception {
+		Pedido pedido = pedidoRepository.findById(codigoPedido)
+				.orElseThrow(() -> new Exception("Pedido não encontrado"));
+
+		switch (StatusPedidoEnum.getEnum(pedido.getCodigoStatus())) {
+
+		case REALIZADO:
+			pedido.setCodigoStatus(StatusPedidoEnum.CONFIRMADO.getCodigo());
+			break;
+
+		case CONFIRMADO:
+			pedido.setCodigoStatus(StatusPedidoEnum.EM_PREPARO.getCodigo());
+			break;
+
+		case EM_PREPARO:
+			pedido.setCodigoStatus(StatusPedidoEnum.EM_ENTREGA.getCodigo());
+			break;
+
+		case EM_ENTREGA:
+			pedido.setCodigoStatus(StatusPedidoEnum.ENTREGUE.getCodigo());
+			break;
+
+		default:
+			break;
+		}
+
+		pedidoRepository.save(pedido);
+
+	}
+
+	@Override
+	public void recusar(Long codigoPedido) throws Exception {
+
+		Pedido pedido = pedidoRepository.findById(codigoPedido)
+				.orElseThrow(() -> new Exception("Pedido não encontrado"));
+
+		pedido.setCodigoStatus(StatusPedidoEnum.RECUSADO.getCodigo());
+
+		pedidoRepository.save(pedido);
+
 	}
 
 }

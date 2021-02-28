@@ -1,5 +1,7 @@
 package br.com.easywaiter.server.service.impl;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import br.com.easywaiter.server.repository.domain.Categoria;
 import br.com.easywaiter.server.repository.jpa.CategoriaRepository;
 import br.com.easywaiter.server.service.CategoriaService;
+import br.com.easywaiter.server.service.ProdutoService;
 import br.com.easywaiter.server.util.dto.CategoriaDTO;
 
 @Service
@@ -19,6 +22,9 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+
+	@Autowired
+	private ProdutoService produtoService;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -37,8 +43,8 @@ public class CategoriaServiceImpl implements CategoriaService {
 	@Override
 	public List<CategoriaDTO> adquirirPorEstabelecimento(Long codigoEstabelecimento) {
 
-		return modelMapper.map(categoriaRepository.findByCodigoEstabelecimento(codigoEstabelecimento),
-				TypeToken.getParameterized(List.class, CategoriaDTO.class).getType());
+		return modelMapper.map(categoriaRepository.findByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByIdDesc(
+				codigoEstabelecimento), TypeToken.getParameterized(List.class, CategoriaDTO.class).getType());
 	}
 
 	@Override
@@ -54,6 +60,27 @@ public class CategoriaServiceImpl implements CategoriaService {
 		categoria.setNome(categoriaDTO.getNome());
 
 		categoriaRepository.save(categoria);
+	}
+
+	@Override
+	public void excluir(Long codigoCategoria) throws Exception {
+		Optional<Categoria> optionalCategoria = categoriaRepository.findById(codigoCategoria);
+
+		if (!optionalCategoria.isPresent()) {
+			throw new Exception("Categoria não encontrada");
+		}
+
+		Categoria categoria = optionalCategoria.get();
+
+		if (produtoService.adquirirQuantidadeDeProdutosValidosDeUmaCategoria(categoria.getId()) > 0) {
+
+			throw new Exception("Não é possível excluir a categoria pois possui produtos vinculados");
+		}
+
+		categoria.setDataExclusao(Date.from(Instant.now()));
+
+		categoriaRepository.save(categoria);
+
 	}
 
 }

@@ -2,6 +2,7 @@ package br.com.easywaiter.server.repository.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +39,10 @@ public class Produto implements Serializable {
 
 	@Lob
 	private byte[] imagem;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "dt_exclusao")
+	private Date dataExclusao;
 
 	@Column(name = "cd_estabelecimento", nullable = false)
 	private Long codigoEstabelecimento;

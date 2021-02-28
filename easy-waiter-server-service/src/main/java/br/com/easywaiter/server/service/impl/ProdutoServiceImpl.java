@@ -1,6 +1,7 @@
 package br.com.easywaiter.server.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,30 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}
 
 	@Override
-	public List<ProdutoDTO> adquirirTodos() {
+	public List<ProdutoDTO> adquirirTodos(Long codigoEstabelecimento) {
 
-		return modelMapper.map(produtoRepository.findAll(),
+		return modelMapper.map(produtoRepository.findAllByCodigoEstabelecimento(codigoEstabelecimento),
 				TypeToken.getParameterized(List.class, ProdutoDTO.class).getType());
 
+	}
+
+	@Override
+	public ProdutoDTO adquirir(Long codigoProduto) throws Exception {
+
+		Optional<Produto> optionalProduto = produtoRepository.findById(codigoProduto);
+
+		if (optionalProduto.isPresent()) {
+
+			return modelMapper.map(optionalProduto.get(), ProdutoDTO.class);
+		}
+
+		throw new Exception("Produto não encontrado");
+	}
+
+	@Override
+	public Integer adquirirQuantidadeDeProdutosValidosDeUmaCategoria(Long codigoCategoria) {
+
+		return produtoRepository.countByCodigoCategoriaAndDataExclusaoIsNull(codigoCategoria);
 	}
 
 }

@@ -1,6 +1,6 @@
 package br.com.easywaiter.server.util.dto;
 
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Getter;
@@ -8,7 +8,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PedidoExporDTO {
+public class PedidoExporDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
@@ -20,6 +21,6 @@ public class PedidoExporDTO {
 
 	private Long codigoStatus;
 
-	private Date dataCadastro;
+	private String dataCadastro;
 
 }

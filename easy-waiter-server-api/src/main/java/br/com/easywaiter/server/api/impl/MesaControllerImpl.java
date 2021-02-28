@@ -21,9 +21,9 @@ public class MesaControllerImpl implements MesaController {
 	private TokenService tokenService;
 
 	@Override
-	public ResponseEntity<Void> cadastrar(List<Long> listaMesas, String token) {
+	public ResponseEntity<Void> cadastrar(Long numeroMesa, String token) throws Exception {
 
-		mesaService.cadastrar(listaMesas, tokenService.getIdUsuarioPorHeader(token));
+		mesaService.cadastrar(numeroMesa, tokenService.getIdUsuarioPorHeader(token));
 
 		return ResponseEntity.ok().build();
 	}
@@ -32,6 +32,22 @@ public class MesaControllerImpl implements MesaController {
 	public ResponseEntity<List<MesaDTO>> adquirirPorEstabelecimento(String token) {
 
 		return ResponseEntity.ok(mesaService.adquirirPorEstabelecimento(tokenService.getIdUsuarioPorHeader(token)));
+	}
+
+	@Override
+	public ResponseEntity<Void> editar(MesaDTO mesaDTO) throws Exception {
+
+		mesaService.editar(mesaDTO);
+
+		return ResponseEntity.ok().build();
+	}
+
+	@Override
+	public ResponseEntity<Void> excluir(Long codigoMesa) throws Exception {
+
+		mesaService.excluir(codigoMesa);
+
+		return ResponseEntity.ok().build();
 	}
 
 }

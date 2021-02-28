@@ -27,4 +27,10 @@ public interface PedidoController {
 	public ResponseEntity<List<PedidoExporDTO>> adquirirNaoFinalizados(
 			@RequestHeader(name = "Authorization") String token);
 
+	@PostMapping("/prosseguir")
+	public ResponseEntity<Void> prosseguir(@RequestParam(name = "codigoPedido") Long codigoPedido) throws Exception;
+
+	@PostMapping("/recusar")
+	public ResponseEntity<Void> recusar(@RequestParam(name = "codigoPedido") Long codigoPedido) throws Exception;
+
 }

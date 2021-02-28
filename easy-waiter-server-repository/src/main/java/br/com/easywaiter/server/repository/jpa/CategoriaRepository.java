@@ -8,6 +8,6 @@ import br.com.easywaiter.server.repository.domain.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
-	List<Categoria> findByCodigoEstabelecimento(Long codigoEstabelecimento);
+	List<Categoria> findByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByIdDesc(Long codigoEstabelecimento);
 
 }

@@ -1,7 +1,9 @@
 package br.com.easywaiter.server.service.impl;
 
-import java.util.ArrayList;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,27 +26,66 @@ public class MesaServiceImpl implements MesaService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public void cadastrar(List<Long> listaMesas, Long codigoEstabelecimento) {
+	public void cadastrar(Long numeroMesa, Long codigoEstabelecimento) throws Exception {
 
-		List<Mesa> listaPersistir = new ArrayList<>();
+		Optional<Mesa> optionalMesa = mesaRepository.findFirstByNumero(numeroMesa);
 
-		listaMesas.forEach(numeroMesa -> {
-			Mesa mesa = new Mesa();
-			mesa.setNumero(numeroMesa);
-			mesa.setCodigoEstabelecimento(codigoEstabelecimento);
+		if (optionalMesa.isPresent()) {
 
-			listaPersistir.add(mesa);
-		});
+			throw new Exception("Mesa já cadastrada");
+		}
 
-		mesaRepository.saveAll(listaPersistir);
+		Mesa mesa = new Mesa();
+		mesa.setNumero(numeroMesa);
+		mesa.setCodigoEstabelecimento(codigoEstabelecimento);
+
+		mesaRepository.save(mesa);
 
 	}
 
 	@Override
 	public List<MesaDTO> adquirirPorEstabelecimento(Long codigoEstabelecimento) {
 
-		return modelMapper.map(mesaRepository.findByCodigoEstabelecimento(codigoEstabelecimento),
+		return modelMapper.map(mesaRepository.findByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByNumeroAsc(codigoEstabelecimento),
 				TypeToken.getParameterized(List.class, MesaDTO.class).getType());
+	}
+
+	@Override
+	public void excluir(Long codigoMesa) throws Exception {
+		Optional<Mesa> optionalMesa = mesaRepository.findById(codigoMesa);
+
+		if (!optionalMesa.isPresent()) {
+
+			throw new Exception("Mesa não encontrada");
+		}
+
+		Mesa mesa = optionalMesa.get();
+		mesa.setDataExclusao(Date.from(Instant.now()));
+
+		mesaRepository.save(mesa);
+	}
+
+	@Override
+	public void editar(MesaDTO mesaDTO) throws Exception {
+
+		Optional<Mesa> optionalMesaComNumero = mesaRepository.findFirstByNumero(mesaDTO.getNumero());
+
+		if (optionalMesaComNumero.isPresent()) {
+
+			throw new Exception("Mesa já cadastrada");
+		}
+
+		Optional<Mesa> optionalMesa = mesaRepository.findById(mesaDTO.getId());
+
+		if (!optionalMesa.isPresent()) {
+
+			throw new Exception("Mesa não encontrada");
+		}
+
+		Mesa mesa = optionalMesa.get();
+		mesa.setNumero(mesaDTO.getNumero());
+
+		mesaRepository.save(mesa);
 	}
 
 }

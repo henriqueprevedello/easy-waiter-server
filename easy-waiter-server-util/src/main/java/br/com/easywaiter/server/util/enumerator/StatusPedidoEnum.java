@@ -6,15 +6,19 @@ import java.util.Optional;
 
 public enum StatusPedidoEnum {
 
-	INICIADO(0L),
+	CANCELADO(0L),
 
-	RECUSADO(1L),
+	REALIZADO(1L),
 
-	CANCELADO(2L),
+	CONFIRMADO(2L),
 
-	EM_PREPARO(3L),
+	RECUSADO(3L),
 
-	ENTREGUE(4L);
+	EM_PREPARO(4L),
+
+	EM_ENTREGA(5L),
+
+	ENTREGUE(6L);
 
 	private static Map<Long, StatusPedidoEnum> mapa = new HashMap<>();
 

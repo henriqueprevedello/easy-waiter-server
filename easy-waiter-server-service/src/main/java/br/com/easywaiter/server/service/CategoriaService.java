@@ -10,6 +10,8 @@ public interface CategoriaService {
 
 	void editar(CategoriaDTO categoriaDTO) throws Exception;
 
+	void excluir(Long codigoCategoria) throws Exception;
+
 	List<CategoriaDTO> adquirirPorEstabelecimento(Long codigoEstabelecimento);
 
 }

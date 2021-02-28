@@ -9,8 +9,12 @@ public interface PedidoService {
 
 	Long adicionar(PedidoDTO pedidoDTO);
 
-	PedidoDTO adquirir(Long codigoPedido);
+	PedidoDTO adquirirDTO(Long codigoPedido);
 
 	List<PedidoExporDTO> adquirirNaoFinalizados(Long codigoEstabelecimento);
+
+	void prosseguir(Long codigoPedido) throws Exception;
+
+	void recusar(Long codigoPedido) throws Exception;
 
 }

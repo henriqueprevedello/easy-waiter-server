@@ -26,7 +26,6 @@ public class CategoriaControllerImpl implements CategoriaController {
 		categoriaService.cadastrar(categoriaDTO, tokenService.getIdUsuarioPorHeader(token));
 
 		return ResponseEntity.ok().build();
-
 	}
 
 	@Override
@@ -40,6 +39,14 @@ public class CategoriaControllerImpl implements CategoriaController {
 	public ResponseEntity<Void> editar(CategoriaDTO categoriaDTO) throws Exception {
 
 		categoriaService.editar(categoriaDTO);
+
+		return ResponseEntity.ok().build();
+	}
+
+	@Override
+	public ResponseEntity<Void> excluir(Long codigoCategoria) throws Exception {
+
+		categoriaService.excluir(codigoCategoria);
 
 		return ResponseEntity.ok().build();
 	}

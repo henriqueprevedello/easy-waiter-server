@@ -32,13 +32,29 @@ public class PedidoControllerImpl implements PedidoController {
 	@Override
 	public ResponseEntity<PedidoDTO> adquirir(Long codigoPedido) {
 
-		return ResponseEntity.ok(pedidoService.adquirir(codigoPedido));
+		return ResponseEntity.ok(pedidoService.adquirirDTO(codigoPedido));
 	}
 
 	@Override
 	public ResponseEntity<List<PedidoExporDTO>> adquirirNaoFinalizados(String token) {
 
 		return ResponseEntity.ok(pedidoService.adquirirNaoFinalizados(tokenService.getIdUsuarioPorHeader(token)));
+	}
+
+	@Override
+	public ResponseEntity<Void> prosseguir(Long codigoPedido) throws Exception {
+
+		pedidoService.prosseguir(codigoPedido);
+
+		return ResponseEntity.ok().build();
+	}
+
+	@Override
+	public ResponseEntity<Void> recusar(Long codigoPedido) throws Exception {
+
+		pedidoService.recusar(codigoPedido);
+
+		return ResponseEntity.ok().build();
 	}
 
 }

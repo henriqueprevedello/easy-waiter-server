@@ -23,33 +23,29 @@ import org.modelmapper.ModelMapper;
  * allows to specify the {@link Converter} that will be registered within the
  * model mapper.
  *
- * @param <S>
- *            the source object type
- * @param <D>
- *            the destination object type
+ * @param <S> the source object type
+ * @param <D> the destination object type
  *
  * @author Jakub Narloch
  */
-public abstract class ConverterConfigurerSupport<S, D>  {
+public abstract class ConverterConfigurerSupport<S, D> implements ModelMapperConfigurer {
 
-    /**
-     * Allows to specify a custom converter between two types.
-     *
-     * @return the converter
-     */
-    public abstract Converter<S, D> converter();
+	/**
+	 * Allows to specify a custom converter between two types.
+	 *
+	 * @return the converter
+	 */
+	public abstract Converter<S, D> converter();
 
-    /**
-     * Configures the passed {@link ModelMapper} instance by registering the
-     * {@link Converter} defined by {@link #converter()} method.
-     *
-     * @param modelMapper
-     *            {@link ModelMapper} instance to be configured
-     */
-    
-    public void configure(ModelMapper modelMapper) {
+	/**
+	 * Configures the passed {@link ModelMapper} instance by registering the
+	 * {@link Converter} defined by {@link #converter()} method.
+	 *
+	 * @param modelMapper {@link ModelMapper} instance to be configured
+	 */
 
-        modelMapper.addConverter(converter());
-    }
+	public void configure(ModelMapper modelMapper) {
+
+		modelMapper.addConverter(converter());
+	}
 }
-

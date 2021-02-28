@@ -8,6 +8,10 @@ public interface ProdutoService {
 
 	void adicionar(ProdutoDTO produtoDTO, Long codigoEstabelecimento);
 
-	List<ProdutoDTO> adquirirTodos();
+	List<ProdutoDTO> adquirirTodos(Long codigoEstabelecimento);
+
+	ProdutoDTO adquirir(Long codigoProduto) throws Exception;
+
+	Integer adquirirQuantidadeDeProdutosValidosDeUmaCategoria(Long codigoCategoria);
 
 }

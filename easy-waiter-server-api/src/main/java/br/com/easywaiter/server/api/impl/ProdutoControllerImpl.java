@@ -29,9 +29,15 @@ public class ProdutoControllerImpl implements ProdutoController {
 	}
 
 	@Override
-	public ResponseEntity<List<ProdutoDTO>> adquirirTodos() {
+	public ResponseEntity<ProdutoDTO> adquirir(Long codigoProduto) throws Exception {
 
-		return ResponseEntity.ok(produtoService.adquirirTodos());
+		return ResponseEntity.ok(produtoService.adquirir(codigoProduto));
+	}
+
+	@Override
+	public ResponseEntity<List<ProdutoDTO>> adquirirTodos(String token) {
+
+		return ResponseEntity.ok(produtoService.adquirirTodos(tokenService.getIdUsuarioPorHeader(token)));
 	}
 
 }

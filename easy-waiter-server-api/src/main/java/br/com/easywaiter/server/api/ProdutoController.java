@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.easywaiter.server.util.dto.ProdutoDTO;
 
@@ -19,6 +20,10 @@ public interface ProdutoController {
 			@RequestHeader(name = "Authorization") String token);
 
 	@GetMapping
-	public ResponseEntity<List<ProdutoDTO>> adquirirTodos();
+	public ResponseEntity<ProdutoDTO> adquirir(@RequestParam(name = "codigoProduto") Long codigoProduto)
+			throws Exception;
+
+	@GetMapping(value = "/adquirirTodos")
+	public ResponseEntity<List<ProdutoDTO>> adquirirTodos(@RequestHeader(name = "Authorization") String token);
 
 }
