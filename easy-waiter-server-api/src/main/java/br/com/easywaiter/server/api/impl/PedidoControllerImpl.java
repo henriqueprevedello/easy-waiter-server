@@ -10,7 +10,6 @@ import br.com.easywaiter.server.api.PedidoController;
 import br.com.easywaiter.server.configuration.TokenService;
 import br.com.easywaiter.server.service.PedidoService;
 import br.com.easywaiter.server.util.dto.PedidoDTO;
-import br.com.easywaiter.server.util.dto.PedidoExporDTO;
 
 @RestController
 public class PedidoControllerImpl implements PedidoController {
@@ -36,7 +35,7 @@ public class PedidoControllerImpl implements PedidoController {
 	}
 
 	@Override
-	public ResponseEntity<List<PedidoExporDTO>> adquirirNaoFinalizados(String token) {
+	public ResponseEntity<List<PedidoDTO>> adquirirNaoFinalizados(String token) {
 
 		return ResponseEntity.ok(pedidoService.adquirirNaoFinalizados(tokenService.getIdUsuarioPorHeader(token)));
 	}

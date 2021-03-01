@@ -1,5 +1,7 @@
 package br.com.easywaiter.server.service.impl;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +42,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public List<ProdutoDTO> adquirirTodos(Long codigoEstabelecimento) {
 
-		return modelMapper.map(produtoRepository.findAllByCodigoEstabelecimento(codigoEstabelecimento),
+		return modelMapper.map(produtoRepository.findAllByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByIdDesc(codigoEstabelecimento),
 				TypeToken.getParameterized(List.class, ProdutoDTO.class).getType());
 
 	}
@@ -62,6 +64,38 @@ public class ProdutoServiceImpl implements ProdutoService {
 	public Integer adquirirQuantidadeDeProdutosValidosDeUmaCategoria(Long codigoCategoria) {
 
 		return produtoRepository.countByCodigoCategoriaAndDataExclusaoIsNull(codigoCategoria);
+	}
+
+	@Override
+	public void excluir(Long codigoProduto) throws Exception {
+		Optional<Produto> optionalProduto = produtoRepository.findById(codigoProduto);
+
+		if (!optionalProduto.isPresent()) {
+			throw new Exception("Produto não encontrado");
+		}
+
+		Produto produto = optionalProduto.get();
+		produto.setDataExclusao(Date.from(Instant.now()));
+
+		produtoRepository.save(produto);
+	}
+
+	@Override
+	public void editar(ProdutoDTO produtoDTO) throws Exception {
+		Optional<Produto> optionalProduto = produtoRepository.findById(produtoDTO.getId());
+
+		if (!optionalProduto.isPresent()) {
+			throw new Exception("Produto não encontrado");
+		}
+
+		Produto produto = optionalProduto.get();
+		produto.setNome(produtoDTO.getNome());
+		produto.setDescricao(produtoDTO.getDescricao());
+		produto.setAtivo(produtoDTO.getAtivo());
+		produto.setCodigoCategoria(produtoDTO.getCategoria().getId());
+		produto.setValor(produtoDTO.getValor());
+
+		produtoRepository.save(produto);
 	}
 
 }

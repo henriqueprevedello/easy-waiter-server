@@ -40,4 +40,20 @@ public class ProdutoControllerImpl implements ProdutoController {
 		return ResponseEntity.ok(produtoService.adquirirTodos(tokenService.getIdUsuarioPorHeader(token)));
 	}
 
+	@Override
+	public ResponseEntity<Void> editar(ProdutoDTO produtoDTO) throws Exception {
+
+		produtoService.editar(produtoDTO);
+
+		return ResponseEntity.ok().build();
+	}
+
+	@Override
+	public ResponseEntity<Void> excluir(Long codigoProduto) throws Exception {
+
+		produtoService.excluir(codigoProduto);
+
+		return ResponseEntity.ok().build();
+	}
+
 }

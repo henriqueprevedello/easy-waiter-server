@@ -3,7 +3,6 @@ package br.com.easywaiter.server.service;
 import java.util.List;
 
 import br.com.easywaiter.server.util.dto.PedidoDTO;
-import br.com.easywaiter.server.util.dto.PedidoExporDTO;
 
 public interface PedidoService {
 
@@ -11,7 +10,7 @@ public interface PedidoService {
 
 	PedidoDTO adquirirDTO(Long codigoPedido);
 
-	List<PedidoExporDTO> adquirirNaoFinalizados(Long codigoEstabelecimento);
+	List<PedidoDTO> adquirirNaoFinalizados(Long codigoEstabelecimento);
 
 	void prosseguir(Long codigoPedido) throws Exception;
 

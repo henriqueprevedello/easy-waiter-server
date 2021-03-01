@@ -15,10 +15,16 @@ public class PedidoDTO {
 
 	private Long codigoCliente;
 
+	private String nomeCliente;
+
 	private Long codigoEstabelecimento;
+
+	private Long numeroMesa;
 
 	private Long codigoMesa;
 
 	private Long codigoStatus;
+
+	private String dataCadastro;
 
 }

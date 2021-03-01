@@ -21,9 +21,15 @@ public class ComandaControllerImpl implements ComandaController {
 	private TokenService tokenService;
 
 	@Override
-	public ResponseEntity<List<ComandaDTO>> adquirir(String token) {
+	public ResponseEntity<List<ComandaDTO>> adquirirTodas(String token) {
 
-		return ResponseEntity.ok(comandaService.adquirir(tokenService.getIdUsuarioPorHeader(token)));
+		return ResponseEntity.ok(comandaService.adquirirTodas(tokenService.getIdUsuarioPorHeader(token)));
+	}
+
+	@Override
+	public ResponseEntity<ComandaDTO> adquirir(Long codigoComanda) throws Exception {
+
+		return ResponseEntity.ok(comandaService.adquirir(codigoComanda));
 	}
 
 }

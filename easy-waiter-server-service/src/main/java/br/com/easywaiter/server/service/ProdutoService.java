@@ -14,4 +14,8 @@ public interface ProdutoService {
 
 	Integer adquirirQuantidadeDeProdutosValidosDeUmaCategoria(Long codigoCategoria);
 
+	void excluir(Long codigoProduto) throws Exception;
+
+	void editar(ProdutoDTO produtoDTO) throws Exception;
+
 }

@@ -1,7 +1,7 @@
 package br.com.easywaiter.server.util.dto;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -21,8 +21,10 @@ public class ComandaDTO {
 
 	private List<PedidoDTO> pedidos = new ArrayList<>();
 
-	private Date dataAbertura;
+	private String dataAbertura;
 
-	private Date dataFechamento;
+	private String dataFechamento;
+
+	private BigDecimal valorTotal;
 
 }

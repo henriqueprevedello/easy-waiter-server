@@ -9,6 +9,8 @@ public interface ComandaService {
 
 	Comanda adquirirOuAbrir(Long codigoCliente, Long codigoEstabelecimento, Long codigoMesa);
 
-	List<ComandaDTO> adquirir(Long codigoEstabelecimento);
+	List<ComandaDTO> adquirirTodas(Long codigoEstabelecimento);
+
+	ComandaDTO adquirir(Long codigoComanda) throws Exception;
 
 }
