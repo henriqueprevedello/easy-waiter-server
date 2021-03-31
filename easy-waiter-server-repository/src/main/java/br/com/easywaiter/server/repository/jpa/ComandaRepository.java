@@ -9,8 +9,9 @@ import br.com.easywaiter.server.repository.domain.Comanda;
 
 public interface ComandaRepository extends JpaRepository<Comanda, Long> {
 
-	Optional<Comanda> findByDataFechamentoIsNullAndCodigoCliente(Long codigoCliente);
+	Optional<Comanda> findByCodigoEstabelecimentoAndCodigoClienteAndDataFechamentoIsNull(Long codigoEstabelecimento,
+			Long codigoCliente);
 
-	List<Comanda> findByCodigoEstabelecimento(Long codigoEstabelecimento);
+	List<Comanda> findByCodigoEstabelecimentoAndDataFechamentoIsNull(Long codigoEstabelecimento);
 
 }

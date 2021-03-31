@@ -1,6 +1,8 @@
 package br.com.easywaiter.server.util.enumerator;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -50,5 +52,11 @@ public enum StatusPedidoEnum {
 		}
 
 		return StatusPedidoEnum.CANCELADO;
+	}
+
+	public static List<StatusPedidoEnum> getFinalizados() {
+
+		return Arrays.asList(StatusPedidoEnum.CANCELADO, StatusPedidoEnum.RECUSADO, StatusPedidoEnum.ENTREGUE);
+
 	}
 }

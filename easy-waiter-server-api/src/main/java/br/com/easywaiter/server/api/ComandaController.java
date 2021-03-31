@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,5 +20,8 @@ public interface ComandaController {
 	@GetMapping
 	public ResponseEntity<ComandaDTO> adquirir(@RequestParam(name = "codigoComanda") Long codigoComanda)
 			throws Exception;
+
+	@PostMapping(value = "/pagar")
+	public ResponseEntity<Void> pagar(@RequestParam(name = "codigoComanda") Long codigoComanda) throws Exception;
 
 }

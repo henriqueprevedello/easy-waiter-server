@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.easywaiter.server.util.dto.ListagemPedidoDTO;
 import br.com.easywaiter.server.util.dto.PedidoDTO;
 
 @RequestMapping(value = "/pedido")
@@ -30,5 +31,8 @@ public interface PedidoController {
 
 	@PostMapping("/recusar")
 	public ResponseEntity<Void> recusar(@RequestParam(name = "codigoPedido") Long codigoPedido) throws Exception;
+
+	@GetMapping("/adquirirTodos")
+	public ResponseEntity<List<ListagemPedidoDTO>> adquirirTodos(@RequestHeader(name = "Authorization") String token);
 
 }

@@ -2,8 +2,11 @@ package br.com.easywaiter.server.service.impl;
 
 import static br.com.easywaiter.server.util.enumerator.StatusPedidoEnum.REALIZADO;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +15,11 @@ import org.springframework.stereotype.Service;
 import com.google.gson.reflect.TypeToken;
 
 import br.com.easywaiter.server.repository.domain.Pedido;
+import br.com.easywaiter.server.repository.domain.PedidoItem;
 import br.com.easywaiter.server.repository.jpa.PedidoRepository;
 import br.com.easywaiter.server.service.ComandaService;
 import br.com.easywaiter.server.service.PedidoService;
+import br.com.easywaiter.server.util.dto.ListagemPedidoDTO;
 import br.com.easywaiter.server.util.dto.PedidoDTO;
 import br.com.easywaiter.server.util.enumerator.StatusPedidoEnum;
 
@@ -113,6 +118,41 @@ public class PedidoServiceImpl implements PedidoService {
 		pedido.setCodigoStatus(StatusPedidoEnum.RECUSADO.getCodigo());
 
 		pedidoRepository.save(pedido);
+
+	}
+
+	@Override
+	public List<ListagemPedidoDTO> adquirirTodos(Long codigoCliente) {
+
+		List<Pedido> listaPedidos = pedidoRepository.adquirirTodosPorCodigoClienteEmComandaAberta(codigoCliente);
+
+		List<ListagemPedidoDTO> listaPedidosListagem = new ArrayList<ListagemPedidoDTO>();
+
+		listaPedidos.forEach(pedido -> {
+
+			ListagemPedidoDTO listagemPedidoDTO = new ListagemPedidoDTO();
+			listagemPedidoDTO.setId(pedido.getId());
+			listagemPedidoDTO.setValorTotal(this.calcularValorTotalPedidoItens(pedido.getPedidoItens()));
+			listagemPedidoDTO.setQuantidadeProdutos(this.calcularQuantidadeTotalPedidoItens(pedido.getPedidoItens()));
+			listagemPedidoDTO.setCodigoStatus(pedido.getCodigoStatus());
+
+			listaPedidosListagem.add(listagemPedidoDTO);
+
+		});
+
+		return listaPedidosListagem;
+
+	}
+
+	private BigDecimal calcularValorTotalPedidoItens(List<PedidoItem> pedidoItens) {
+		return pedidoItens.stream()
+				.map(pitens -> BigDecimal.valueOf(pitens.getQuantidade()).multiply(pitens.getProduto().getValor()))
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
+
+	}
+
+	private Long calcularQuantidadeTotalPedidoItens(List<PedidoItem> pedidoItens) {
+		return pedidoItens.stream().map(PedidoItem::getQuantidade).collect(Collectors.summingLong(Long::longValue));
 
 	}
 

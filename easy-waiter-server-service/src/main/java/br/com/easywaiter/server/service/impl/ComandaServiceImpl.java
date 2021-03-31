@@ -1,6 +1,8 @@
 package br.com.easywaiter.server.service.impl;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ import br.com.easywaiter.server.repository.domain.PedidoItem;
 import br.com.easywaiter.server.repository.jpa.ComandaRepository;
 import br.com.easywaiter.server.service.ComandaService;
 import br.com.easywaiter.server.util.dto.ComandaDTO;
+import br.com.easywaiter.server.util.enumerator.StatusPedidoEnum;
 
 @Service
 public class ComandaServiceImpl implements ComandaService {
@@ -29,7 +32,9 @@ public class ComandaServiceImpl implements ComandaService {
 	@Override
 	public Comanda adquirirOuAbrir(Long codigoCliente, Long codigoEstabelecimento, Long codigoMesa) {
 
-		Optional<Comanda> optionalComanda = comandaRepository.findByDataFechamentoIsNullAndCodigoCliente(codigoCliente);
+		Optional<Comanda> optionalComanda = comandaRepository
+				.findByCodigoEstabelecimentoAndCodigoClienteAndDataFechamentoIsNull(codigoEstabelecimento,
+						codigoCliente);
 
 		if (optionalComanda.isPresent()) {
 
@@ -47,7 +52,8 @@ public class ComandaServiceImpl implements ComandaService {
 	@Override
 	public List<ComandaDTO> adquirirTodas(Long codigoEstabelecimento) {
 
-		return modelMapper.map(comandaRepository.findByCodigoEstabelecimento(codigoEstabelecimento),
+		return modelMapper.map(
+				comandaRepository.findByCodigoEstabelecimentoAndDataFechamentoIsNull(codigoEstabelecimento),
 				TypeToken.getParameterized(List.class, ComandaDTO.class).getType());
 	}
 
@@ -79,6 +85,34 @@ public class ComandaServiceImpl implements ComandaService {
 				.map(pitens -> BigDecimal.valueOf(pitens.getQuantidade()).multiply(pitens.getProduto().getValor()))
 				.reduce(BigDecimal.ZERO, BigDecimal::add);
 
+	}
+
+	@Override
+	public void pagar(Long codigoComanda) throws Exception {
+
+		Optional<Comanda> optionalComanda = comandaRepository.findById(codigoComanda);
+
+		if (optionalComanda.isPresent()) {
+
+			Comanda comanda = optionalComanda.get();
+
+			if (this.contemPedidoPendente(comanda)) {
+
+				throw new Exception("Não é possível fechar a comanda pois possui pedidos não finalizados.");
+			}
+
+			comanda.setDataFechamento(Date.from(Instant.now()));
+
+			comandaRepository.save(comanda);
+
+		}
+
+		throw new Exception("Comanda não encontrada");
+	}
+
+	private boolean contemPedidoPendente(Comanda comanda) {
+		return comanda.getPedidos().stream().anyMatch(pedido -> !StatusPedidoEnum.getFinalizados()
+				.contains(StatusPedidoEnum.getEnum(pedido.getCodigoStatus())));
 	}
 
 }

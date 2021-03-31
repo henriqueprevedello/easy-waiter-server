@@ -8,11 +8,13 @@ import lombok.Setter;
 public class UsuarioDTO {
 
 	private String email;
-	
+
 	private String senha;
-	
+
 	private String nome;
-	
+
 	private String token;
-	
+
+	private Boolean flagEstabelecimento;
+
 }

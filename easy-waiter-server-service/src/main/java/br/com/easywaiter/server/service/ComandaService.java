@@ -13,4 +13,6 @@ public interface ComandaService {
 
 	ComandaDTO adquirir(Long codigoComanda) throws Exception;
 
+	void pagar(Long codigoComanda) throws Exception;
+
 }

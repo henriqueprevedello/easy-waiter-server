@@ -32,4 +32,12 @@ public class ComandaControllerImpl implements ComandaController {
 		return ResponseEntity.ok(comandaService.adquirir(codigoComanda));
 	}
 
+	@Override
+	public ResponseEntity<Void> pagar(Long codigoComanda) throws Exception {
+
+		comandaService.pagar(codigoComanda);
+
+		return ResponseEntity.ok().build();
+	}
+
 }
