@@ -17,6 +17,7 @@ import br.com.easywaiter.server.repository.domain.Pedido;
 import br.com.easywaiter.server.repository.domain.PedidoItem;
 import br.com.easywaiter.server.repository.jpa.ComandaRepository;
 import br.com.easywaiter.server.service.ComandaService;
+import br.com.easywaiter.server.util.dto.ComandaClienteDTO;
 import br.com.easywaiter.server.util.dto.ComandaDTO;
 import br.com.easywaiter.server.util.enumerator.StatusPedidoEnum;
 
@@ -88,9 +89,10 @@ public class ComandaServiceImpl implements ComandaService {
 	}
 
 	@Override
-	public void pagar(Long codigoComanda) throws Exception {
+	public void pagar(Long codigoCliente) throws Exception {
 
-		Optional<Comanda> optionalComanda = comandaRepository.findById(codigoComanda);
+		Optional<Comanda> optionalComanda = comandaRepository
+				.findFirstByCodigoClienteAndDataFechamentoIsNull(codigoCliente);
 
 		if (optionalComanda.isPresent()) {
 
@@ -102,6 +104,7 @@ public class ComandaServiceImpl implements ComandaService {
 			}
 
 			comanda.setDataFechamento(Date.from(Instant.now()));
+			comanda.setPagamentoRealizado(false);
 
 			comandaRepository.save(comanda);
 
@@ -113,6 +116,53 @@ public class ComandaServiceImpl implements ComandaService {
 	private boolean contemPedidoPendente(Comanda comanda) {
 		return comanda.getPedidos().stream().anyMatch(pedido -> !StatusPedidoEnum.getFinalizados()
 				.contains(StatusPedidoEnum.getEnum(pedido.getCodigoStatus())));
+	}
+
+	@Override
+	public ComandaClienteDTO adquirirAberta(Long codigoCliente) {
+
+		Optional<Comanda> optionalComanda = comandaRepository
+				.findFirstByCodigoClienteAndDataFechamentoIsNull(codigoCliente);
+
+		if (optionalComanda.isPresent()) {
+
+			ComandaClienteDTO comandaDTO = modelMapper.map(optionalComanda.get(), ComandaClienteDTO.class);
+
+			comandaDTO.setNomeCliente(optionalComanda.get().getCliente().getUsuario().getNome());
+			comandaDTO.setNomeEstabelecimento(optionalComanda.get().getEstabelecimento().getUsuario().getNome());
+			comandaDTO.setNumeroMesa(optionalComanda.get().getMesa().getNumero());
+			comandaDTO.setValorTotal(this.calcularValorTotal(optionalComanda.get().getPedidos()));
+
+			return comandaDTO;
+		}
+
+		return null;
+	}
+
+	@Override
+	public Boolean verificarPagamento(Long codigoCliente) throws Exception {
+		Optional<Comanda> optionalComanda = comandaRepository
+				.findFirstByCodigoClienteAndDataFechamentoIsNull(codigoCliente);
+
+		if (!optionalComanda.isPresent()) {
+			throw new Exception("Não há comanda aberta");
+		}
+
+		return optionalComanda.get().getPagamentoRealizado();
+	}
+
+	@Override
+	public void confirmarPagamento(Long codigoComanda) throws Exception {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(codigoComanda);
+
+		if (!optionalComanda.isPresent()) {
+			throw new Exception("Comanda não encontrada");
+		}
+
+		Comanda comanda = optionalComanda.get();
+		comanda.setPagamentoRealizado(true);
+
+		comandaRepository.save(comanda);
 	}
 
 }

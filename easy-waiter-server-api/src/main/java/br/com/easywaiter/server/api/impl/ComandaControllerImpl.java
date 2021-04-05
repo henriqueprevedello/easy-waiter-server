@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.easywaiter.server.api.ComandaController;
 import br.com.easywaiter.server.configuration.TokenService;
 import br.com.easywaiter.server.service.ComandaService;
+import br.com.easywaiter.server.util.dto.ComandaClienteDTO;
 import br.com.easywaiter.server.util.dto.ComandaDTO;
 
 @RestController
@@ -33,9 +34,29 @@ public class ComandaControllerImpl implements ComandaController {
 	}
 
 	@Override
-	public ResponseEntity<Void> pagar(Long codigoComanda) throws Exception {
+	public ResponseEntity<Void> pagar(String token) throws Exception {
 
-		comandaService.pagar(codigoComanda);
+		comandaService.pagar(tokenService.getIdUsuarioPorHeader(token));
+
+		return ResponseEntity.ok().build();
+	}
+
+	@Override
+	public ResponseEntity<ComandaClienteDTO> adquirirAberta(String token) {
+
+		return ResponseEntity.ok(comandaService.adquirirAberta(tokenService.getIdUsuarioPorHeader(token)));
+	}
+
+	@Override
+	public ResponseEntity<Boolean> pagamentoRealizado(String token) throws Exception {
+
+		return ResponseEntity.ok(comandaService.verificarPagamento(tokenService.getIdUsuarioPorHeader(token)));
+	}
+
+	@Override
+	public ResponseEntity<Void> confirmarPagamento(Long codigoComanda) throws Exception {
+
+		comandaService.confirmarPagamento(codigoComanda);
 
 		return ResponseEntity.ok().build();
 	}
