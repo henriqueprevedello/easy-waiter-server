@@ -53,8 +53,7 @@ public class ComandaServiceImpl implements ComandaService {
 	@Override
 	public List<ComandaDTO> adquirirTodas(Long codigoEstabelecimento) {
 
-		return modelMapper.map(
-				comandaRepository.findByCodigoEstabelecimentoAndDataFechamentoIsNull(codigoEstabelecimento),
+		return modelMapper.map(comandaRepository.findByCodigoEstabelecimento(codigoEstabelecimento),
 				TypeToken.getParameterized(List.class, ComandaDTO.class).getType());
 	}
 
@@ -161,6 +160,7 @@ public class ComandaServiceImpl implements ComandaService {
 
 		Comanda comanda = optionalComanda.get();
 		comanda.setPagamentoRealizado(true);
+		comanda.setDataFechamento(Date.from(Instant.now()));
 
 		comandaRepository.save(comanda);
 	}

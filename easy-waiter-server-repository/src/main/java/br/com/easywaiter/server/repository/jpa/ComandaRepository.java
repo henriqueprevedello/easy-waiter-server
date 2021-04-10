@@ -12,7 +12,7 @@ public interface ComandaRepository extends JpaRepository<Comanda, Long> {
 	Optional<Comanda> findByCodigoEstabelecimentoAndCodigoClienteAndDataFechamentoIsNull(Long codigoEstabelecimento,
 			Long codigoCliente);
 
-	List<Comanda> findByCodigoEstabelecimentoAndDataFechamentoIsNull(Long codigoEstabelecimento);
+	List<Comanda> findByCodigoEstabelecimento(Long codigoEstabelecimento);
 
 	Optional<Comanda> findFirstByCodigoClienteAndDataFechamentoIsNull(Long codigoCliente);
 
