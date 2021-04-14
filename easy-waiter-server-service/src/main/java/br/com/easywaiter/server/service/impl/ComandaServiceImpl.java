@@ -103,7 +103,6 @@ public class ComandaServiceImpl implements ComandaService {
 			}
 
 			comanda.setDataFechamento(Date.from(Instant.now()));
-			comanda.setPagamentoRealizado(false);
 
 			comandaRepository.save(comanda);
 
@@ -143,11 +142,7 @@ public class ComandaServiceImpl implements ComandaService {
 		Optional<Comanda> optionalComanda = comandaRepository
 				.findFirstByCodigoClienteAndDataFechamentoIsNull(codigoCliente);
 
-		if (!optionalComanda.isPresent()) {
-			throw new Exception("Não há comanda aberta");
-		}
-
-		return optionalComanda.get().getPagamentoRealizado();
+		return !optionalComanda.isPresent();
 	}
 
 	@Override
@@ -159,7 +154,6 @@ public class ComandaServiceImpl implements ComandaService {
 		}
 
 		Comanda comanda = optionalComanda.get();
-		comanda.setPagamentoRealizado(true);
 		comanda.setDataFechamento(Date.from(Instant.now()));
 
 		comandaRepository.save(comanda);

@@ -51,9 +51,6 @@ public class Comanda implements Serializable {
 	@Column(name = "cd_estabelecimento", nullable = false)
 	private Long codigoEstabelecimento;
 
-	@Column(name = "fl_pagamentorealizado")
-	private Boolean pagamentoRealizado;
-
 	@ManyToOne
 	@JoinColumn(name = "cd_estabelecimento", referencedColumnName = "cd_usuario", nullable = false, insertable = false, updatable = false)
 	private Estabelecimento estabelecimento;
