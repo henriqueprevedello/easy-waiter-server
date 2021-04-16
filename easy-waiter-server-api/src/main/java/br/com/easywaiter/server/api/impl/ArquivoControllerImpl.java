@@ -10,6 +10,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,9 +31,9 @@ public class ArquivoControllerImpl implements ArquivoController {
 	private GestaoArquivoService gestaoArquivoService;
 
 	@Override
-	public String uploads(@RequestPart("filename") MultipartFile[] files) {
+	public ResponseEntity<String> uploads(@RequestPart("filename") MultipartFile[] files) {
 
-		return arquivoService.upload(files);
+		return ResponseEntity.ok(arquivoService.upload(files));
 	}
 
 	@Override
