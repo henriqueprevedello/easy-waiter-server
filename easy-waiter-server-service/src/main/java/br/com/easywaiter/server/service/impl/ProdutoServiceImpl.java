@@ -35,6 +35,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		produto.setAtivo(produtoDTO.getAtivo());
 		produto.setCodigoCategoria(produtoDTO.getCategoria().getId());
 		produto.setCodigoEstabelecimento(codigoEstabelecimento);
+		produto.setNomeImagem(produtoDTO.getNomeImagem());
 
 		produtoRepository.save(produto);
 	}
@@ -42,8 +43,8 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public List<ProdutoDTO> adquirirTodos(Long codigoEstabelecimento) {
 
-		return modelMapper.map(produtoRepository.findAllByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByIdDesc(codigoEstabelecimento),
-				TypeToken.getParameterized(List.class, ProdutoDTO.class).getType());
+		return modelMapper.map(produtoRepository.findAllByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByIdDesc(
+				codigoEstabelecimento), TypeToken.getParameterized(List.class, ProdutoDTO.class).getType());
 
 	}
 
@@ -94,6 +95,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		produto.setAtivo(produtoDTO.getAtivo());
 		produto.setCodigoCategoria(produtoDTO.getCategoria().getId());
 		produto.setValor(produtoDTO.getValor());
+		produto.setNomeImagem(produtoDTO.getNomeImagem());
 
 		produtoRepository.save(produto);
 	}

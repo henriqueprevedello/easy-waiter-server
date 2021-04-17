@@ -33,6 +33,9 @@ public class Produto implements Serializable {
 
 	private String descricao;
 
+	@Column(name = "tx_nomeimagem")
+	private String nomeImagem;
+
 	private BigDecimal valor;
 
 	private boolean ativo;
