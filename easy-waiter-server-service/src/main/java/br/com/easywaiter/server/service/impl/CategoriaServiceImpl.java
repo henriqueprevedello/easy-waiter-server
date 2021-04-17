@@ -1,6 +1,7 @@
 package br.com.easywaiter.server.service.impl;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import br.com.easywaiter.server.repository.jpa.CategoriaRepository;
 import br.com.easywaiter.server.service.CategoriaService;
 import br.com.easywaiter.server.service.ProdutoService;
 import br.com.easywaiter.server.util.dto.CategoriaDTO;
+import br.com.easywaiter.server.util.dto.ProdutoDTO;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
@@ -81,6 +83,36 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 		categoriaRepository.save(categoria);
 
+	}
+
+	@Override
+	public List<CategoriaDTO> adquirirCategoriasEProdutosDisponiveis(Long codigoEstabelecimento) {
+
+		List<CategoriaDTO> listaCategoriaDTO = modelMapper.map(
+				categoriaRepository.adquirirCategoriasEProdutosDisponiveis(codigoEstabelecimento),
+				TypeToken.getParameterized(List.class, CategoriaDTO.class).getType());
+
+		List<ProdutoDTO> produtos = produtoService.adquirirNaoExcluidos(codigoEstabelecimento);
+
+		listaCategoriaDTO.forEach(categoria -> {
+
+			List<ProdutoDTO> listaProdutos = new ArrayList<>();
+
+			produtos.forEach(produto -> {
+
+				if (produto.getCategoria() != null && produto.getCategoria().getId().equals(categoria.getId())) {
+
+					produto.setCategoria(null);
+
+					listaProdutos.add(produto);
+				}
+
+			});
+
+			categoria.setProdutos(listaProdutos);
+		});
+
+		return listaCategoriaDTO;
 	}
 
 }

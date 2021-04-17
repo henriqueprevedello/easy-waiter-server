@@ -21,6 +21,6 @@ public class ProdutoDTO {
 
 	private CategoriaDTO categoria;
 
-	private String nomeImagem;
+	private String imagem;
 
 }

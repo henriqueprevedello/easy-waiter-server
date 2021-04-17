@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,15 +32,12 @@ public class Produto implements Serializable {
 
 	private String descricao;
 
-	@Column(name = "tx_nomeimagem")
-	private String nomeImagem;
+	@Column(name = "tx_imagem")
+	private String imagem;
 
 	private BigDecimal valor;
 
 	private boolean ativo;
-
-	@Lob
-	private byte[] imagem;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dt_exclusao")
@@ -60,5 +56,4 @@ public class Produto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cd_categoria", referencedColumnName = "id_categoria", nullable = false, insertable = false, updatable = false)
 	private Categoria categoria;
-
 }

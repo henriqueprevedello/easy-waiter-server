@@ -31,4 +31,8 @@ public interface CategoriaController {
 	public ResponseEntity<List<CategoriaDTO>> adquirirPorEstabelecimento(
 			@RequestHeader(name = "Authorization") String token);
 
+	@GetMapping(value = "/adquirirCategoriasEProdutosDisponiveis")
+	public ResponseEntity<List<CategoriaDTO>> adquirirCategoriasEProdutosDisponiveis(
+			@RequestParam(name = "codigoEstabelecimento") Long codigoEstabelecimento);
+
 }

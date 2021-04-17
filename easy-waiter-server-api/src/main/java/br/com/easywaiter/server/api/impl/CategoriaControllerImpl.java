@@ -51,4 +51,10 @@ public class CategoriaControllerImpl implements CategoriaController {
 		return ResponseEntity.ok().build();
 	}
 
+	@Override
+	public ResponseEntity<List<CategoriaDTO>> adquirirCategoriasEProdutosDisponiveis(Long codigoEstabelecimento) {
+
+		return ResponseEntity.ok(categoriaService.adquirirCategoriasEProdutosDisponiveis(codigoEstabelecimento));
+	}
+
 }

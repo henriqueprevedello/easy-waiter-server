@@ -17,6 +17,6 @@ public interface ArquivoController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public abstract ResponseEntity<StringDTO> uploads(MultipartFile[] files);
 
-	@GetMapping("/files/{fileName:.+}")
+	@GetMapping("/{fileName:.+}")
 	public abstract void download(String fileName, HttpServletResponse response);
 }

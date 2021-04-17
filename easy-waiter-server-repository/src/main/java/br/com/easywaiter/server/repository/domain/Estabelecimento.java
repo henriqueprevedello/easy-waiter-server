@@ -13,6 +13,8 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Where;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,6 +52,7 @@ public class Estabelecimento implements Serializable {
 	private List<Categoria> categorias = new ArrayList<>();
 
 	@OneToMany(mappedBy = "estabelecimento", fetch = FetchType.LAZY)
+	@Where(clause = "dt_exclusao is null")
 	private List<Mesa> mesas = new ArrayList<>();
 
 }

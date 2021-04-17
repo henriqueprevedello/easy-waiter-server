@@ -26,8 +26,6 @@ public class EstabelecimentoDTO {
 
 	private List<ProdutoDTO> produtos = new ArrayList<>();
 
-	private List<CategoriaDTO> categorias = new ArrayList<>();
-
 	private List<MesaDTO> mesas = new ArrayList<>();
 
 }

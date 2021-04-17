@@ -14,4 +14,6 @@ public interface CategoriaService {
 
 	List<CategoriaDTO> adquirirPorEstabelecimento(Long codigoEstabelecimento);
 
+	List<CategoriaDTO> adquirirCategoriasEProdutosDisponiveis(Long codigoEstabelecimento);
+
 }

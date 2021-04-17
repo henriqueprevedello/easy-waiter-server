@@ -37,7 +37,7 @@ public class ProdutoControllerImpl implements ProdutoController {
 	@Override
 	public ResponseEntity<List<ProdutoDTO>> adquirirTodos(String token) {
 
-		return ResponseEntity.ok(produtoService.adquirirTodos(tokenService.getIdUsuarioPorHeader(token)));
+		return ResponseEntity.ok(produtoService.adquirirNaoExcluidos(tokenService.getIdUsuarioPorHeader(token)));
 	}
 
 	@Override
