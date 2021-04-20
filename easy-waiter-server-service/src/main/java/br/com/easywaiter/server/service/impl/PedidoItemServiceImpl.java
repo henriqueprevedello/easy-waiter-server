@@ -28,9 +28,7 @@ public class PedidoItemServiceImpl implements PedidoItemService {
 		List<PedidoItem> listaPersistir = modelMapper.map(pedidoItens,
 				TypeToken.getParameterized(List.class, PedidoItem.class).getType());
 
-		listaPersistir.forEach(pedidoItem -> {
-			pedidoItem.setCodigoPedido(codigoPedido);
-		});
+		listaPersistir.forEach(pedidoItem -> pedidoItem.setCodigoPedido(codigoPedido));
 
 		pedidoItemRepository.saveAll(listaPersistir);
 

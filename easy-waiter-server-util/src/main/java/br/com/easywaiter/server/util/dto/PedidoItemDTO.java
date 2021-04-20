@@ -1,6 +1,5 @@
 package br.com.easywaiter.server.util.dto;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,4 +11,5 @@ public class PedidoItemDTO {
 
 	private Long quantidade;
 
+	private String observacao;
 }

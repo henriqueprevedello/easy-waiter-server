@@ -40,4 +40,7 @@ public class PedidoItem implements Serializable {
 
 	private Long quantidade;
 
+	@Column(name = "tx_observacao")
+	private String observacao;
+
 }

@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -41,9 +40,6 @@ public class Estabelecimento implements Serializable {
 	private String estado;
 
 	private String cidade;
-
-	@Lob
-	private byte[] imagem;
 
 	@OneToMany(mappedBy = "estabelecimento", fetch = FetchType.LAZY)
 	private List<Produto> produtos = new ArrayList<>();
