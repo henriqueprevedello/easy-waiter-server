@@ -48,7 +48,7 @@ public class Estabelecimento implements Serializable {
 	private List<Categoria> categorias = new ArrayList<>();
 
 	@OneToMany(mappedBy = "estabelecimento", fetch = FetchType.LAZY)
-	@Where(clause = "dt_exclusao is null")
+	@Where(clause = "dt_exclusao is null and bl_ocupado = false")
 	private List<Mesa> mesas = new ArrayList<>();
 
 }

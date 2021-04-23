@@ -10,11 +10,11 @@ public enum StatusPedidoEnum {
 
 	CANCELADO(0L),
 
-	REALIZADO(1L),
+	RECUSADO(1L),
 
-	CONFIRMADO(2L),
+	REALIZADO(2L),
 
-	RECUSADO(3L),
+	CONFIRMADO(3L),
 
 	EM_PREPARO(4L),
 

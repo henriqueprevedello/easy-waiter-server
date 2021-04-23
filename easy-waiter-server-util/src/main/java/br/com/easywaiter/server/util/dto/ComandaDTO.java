@@ -19,12 +19,13 @@ public class ComandaDTO {
 
 	private ClienteDTO cliente;
 
+	private BigDecimal valorTotal;
+
 	private List<PedidoDTO> pedidos = new ArrayList<>();
 
 	private String dataAbertura;
 
 	private String dataFechamento;
 
-	private BigDecimal valorTotal;
-
+	private String dataPagamento;
 }
