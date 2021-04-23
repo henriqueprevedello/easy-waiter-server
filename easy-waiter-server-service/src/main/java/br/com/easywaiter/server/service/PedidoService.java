@@ -7,7 +7,7 @@ import br.com.easywaiter.server.util.dto.PedidoDTO;
 
 public interface PedidoService {
 
-	Long adicionar(PedidoDTO pedidoDTO);
+	Long adicionar(PedidoDTO pedidoDTO) throws Exception;
 
 	PedidoDTO adquirirDTO(Long codigoPedido);
 

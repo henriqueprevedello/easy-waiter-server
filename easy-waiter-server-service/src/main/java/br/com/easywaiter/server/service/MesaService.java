@@ -14,4 +14,8 @@ public interface MesaService {
 
 	void editar(MesaDTO mesaDTO) throws Exception;
 
+	void ocupar(Long idMesa) throws Exception;
+
+	void desocupar(Long idMesa) throws Exception;
+
 }

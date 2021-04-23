@@ -22,7 +22,7 @@ public class PedidoControllerImpl implements PedidoController {
 	private TokenService tokenService;
 
 	@Override
-	public ResponseEntity<Long> adicionar(PedidoDTO pedidoDTO, String token) {
+	public ResponseEntity<Long> adicionar(PedidoDTO pedidoDTO, String token) throws Exception {
 
 		pedidoDTO.setCodigoCliente(tokenService.getIdUsuarioPorHeader(token));
 

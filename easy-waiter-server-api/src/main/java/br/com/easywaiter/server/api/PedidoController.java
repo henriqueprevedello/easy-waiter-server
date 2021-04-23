@@ -18,7 +18,7 @@ public interface PedidoController {
 
 	@PostMapping
 	public ResponseEntity<Long> adicionar(@RequestBody PedidoDTO pedidoDTO,
-			@RequestHeader(name = "Authorization") String token);
+			@RequestHeader(name = "Authorization") String token) throws Exception;
 
 	@GetMapping
 	public ResponseEntity<PedidoDTO> adquirir(@RequestParam(name = "codigoPedido") Long codigoPedido);

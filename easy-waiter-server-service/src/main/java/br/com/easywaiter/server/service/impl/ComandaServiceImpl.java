@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.reflect.TypeToken;
@@ -17,6 +18,7 @@ import br.com.easywaiter.server.repository.domain.Pedido;
 import br.com.easywaiter.server.repository.domain.PedidoItem;
 import br.com.easywaiter.server.repository.jpa.ComandaRepository;
 import br.com.easywaiter.server.service.ComandaService;
+import br.com.easywaiter.server.service.MesaService;
 import br.com.easywaiter.server.util.dto.ComandaClienteDTO;
 import br.com.easywaiter.server.util.dto.ComandaDTO;
 import br.com.easywaiter.server.util.enumerator.StatusPedidoEnum;
@@ -24,6 +26,11 @@ import br.com.easywaiter.server.util.enumerator.StatusPedidoEnum;
 @Service
 public class ComandaServiceImpl implements ComandaService {
 
+	@Lazy
+	@Autowired
+	private MesaService mesaService;
+
+	@Lazy
 	@Autowired
 	private ComandaRepository comandaRepository;
 
@@ -31,7 +38,7 @@ public class ComandaServiceImpl implements ComandaService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public Comanda adquirirOuAbrir(Long codigoCliente, Long codigoEstabelecimento, Long codigoMesa) {
+	public Comanda adquirirOuAbrir(Long codigoCliente, Long codigoEstabelecimento, Long codigoMesa) throws Exception {
 
 		Optional<Comanda> optionalComanda = comandaRepository
 				.findByCodigoEstabelecimentoAndCodigoClienteAndDataFechamentoIsNull(codigoEstabelecimento,
@@ -46,6 +53,8 @@ public class ComandaServiceImpl implements ComandaService {
 		comanda.setCodigoCliente(codigoCliente);
 		comanda.setCodigoEstabelecimento(codigoEstabelecimento);
 		comanda.setCodigoMesa(codigoMesa);
+
+		mesaService.ocupar(codigoMesa);
 
 		return comandaRepository.save(comanda);
 	}
@@ -120,7 +129,7 @@ public class ComandaServiceImpl implements ComandaService {
 	public ComandaClienteDTO adquirirAberta(Long codigoCliente) {
 
 		Optional<Comanda> optionalComanda = comandaRepository
-				.findFirstByCodigoClienteAndDataFechamentoIsNull(codigoCliente);
+				.findFirstByCodigoClienteAndDataPagamentoIsNull(codigoCliente);
 
 		if (optionalComanda.isPresent()) {
 
@@ -140,7 +149,7 @@ public class ComandaServiceImpl implements ComandaService {
 	@Override
 	public Boolean verificarPagamento(Long codigoCliente) throws Exception {
 		Optional<Comanda> optionalComanda = comandaRepository
-				.findFirstByCodigoClienteAndDataFechamentoIsNull(codigoCliente);
+				.findFirstByCodigoClienteAndDataPagamentoIsNull(codigoCliente);
 
 		return !optionalComanda.isPresent();
 	}
@@ -154,9 +163,11 @@ public class ComandaServiceImpl implements ComandaService {
 		}
 
 		Comanda comanda = optionalComanda.get();
-		comanda.setDataFechamento(Date.from(Instant.now()));
+		comanda.setDataPagamento(Date.from(Instant.now()));
 
 		comandaRepository.save(comanda);
+
+		mesaService.desocupar(comanda.getCodigoMesa());
 	}
 
 }

@@ -65,4 +65,8 @@ public class Comanda implements Serializable {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date dataFechamento;
 
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "dt_pagamento")
+	private Date dataPagamento;
+
 }

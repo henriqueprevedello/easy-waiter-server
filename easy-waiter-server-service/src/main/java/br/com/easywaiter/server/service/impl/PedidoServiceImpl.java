@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.reflect.TypeToken;
@@ -26,20 +27,24 @@ import br.com.easywaiter.server.util.enumerator.StatusPedidoEnum;
 @Service
 public class PedidoServiceImpl implements PedidoService {
 
-	@Autowired
-	private PedidoRepository pedidoRepository;
-
+	@Lazy
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Lazy
+	@Autowired
+	private PedidoRepository pedidoRepository;
+
+	@Lazy
 	@Autowired
 	private ComandaService comandaService;
 
+	@Lazy
 	@Autowired
 	private PedidoItemServiceImpl pedidoItemService;
 
 	@Override
-	public Long adicionar(PedidoDTO pedidoDTO) {
+	public Long adicionar(PedidoDTO pedidoDTO) throws Exception {
 
 		Pedido pedido = new Pedido();
 

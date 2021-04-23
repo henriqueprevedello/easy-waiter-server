@@ -8,7 +8,7 @@ import br.com.easywaiter.server.util.dto.ComandaDTO;
 
 public interface ComandaService {
 
-	Comanda adquirirOuAbrir(Long codigoCliente, Long codigoEstabelecimento, Long codigoMesa);
+	Comanda adquirirOuAbrir(Long codigoCliente, Long codigoEstabelecimento, Long codigoMesa) throws Exception;
 
 	List<ComandaDTO> adquirirTodas(Long codigoEstabelecimento);
 

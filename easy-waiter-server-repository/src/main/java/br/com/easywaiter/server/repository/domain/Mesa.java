@@ -29,6 +29,7 @@ public class Mesa implements Serializable {
 
 	private Long numero;
 
+	@Column(name = "bl_ocupado")
 	private Boolean ocupado;
 
 	@Temporal(TemporalType.TIMESTAMP)

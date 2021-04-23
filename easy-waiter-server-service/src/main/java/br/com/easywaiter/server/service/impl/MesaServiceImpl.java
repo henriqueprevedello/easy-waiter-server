@@ -40,13 +40,13 @@ public class MesaServiceImpl implements MesaService {
 		mesa.setCodigoEstabelecimento(codigoEstabelecimento);
 
 		mesaRepository.save(mesa);
-
 	}
 
 	@Override
 	public List<MesaDTO> adquirirPorEstabelecimento(Long codigoEstabelecimento) {
 
-		return modelMapper.map(mesaRepository.findByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByNumeroAsc(codigoEstabelecimento),
+		return modelMapper.map(
+				mesaRepository.findByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByNumeroAsc(codigoEstabelecimento),
 				TypeToken.getParameterized(List.class, MesaDTO.class).getType());
 	}
 
@@ -84,6 +84,26 @@ public class MesaServiceImpl implements MesaService {
 
 		Mesa mesa = optionalMesa.get();
 		mesa.setNumero(mesaDTO.getNumero());
+
+		mesaRepository.save(mesa);
+	}
+
+	@Override
+	public void ocupar(Long idMesa) throws Exception {
+
+		this.alterarDisponibilidade(idMesa, true);
+	}
+
+	@Override
+	public void desocupar(Long idMesa) throws Exception {
+
+		this.alterarDisponibilidade(idMesa, false);
+	}
+
+	private void alterarDisponibilidade(Long idMesa, Boolean ocupado) throws Exception {
+		Mesa mesa = mesaRepository.findById(idMesa).orElseThrow(() -> new Exception("Mesa não encontrada"));
+
+		mesa.setOcupado(ocupado);
 
 		mesaRepository.save(mesa);
 	}
