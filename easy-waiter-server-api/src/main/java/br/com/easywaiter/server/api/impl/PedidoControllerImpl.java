@@ -42,9 +42,9 @@ public class PedidoControllerImpl implements PedidoController {
 	}
 
 	@Override
-	public ResponseEntity<Void> prosseguir(Long codigoPedido) throws Exception {
+	public ResponseEntity<Void> atualizarStatus(Long codigoPedido, Long codigoStatus) throws Exception {
 
-		pedidoService.prosseguir(codigoPedido);
+		pedidoService.atualizarStatus(codigoPedido, codigoStatus);
 
 		return ResponseEntity.ok().build();
 	}

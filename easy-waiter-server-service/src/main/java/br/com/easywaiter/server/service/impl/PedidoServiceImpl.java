@@ -84,31 +84,11 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public void prosseguir(Long codigoPedido) throws Exception {
+	public void atualizarStatus(Long codigoPedido, Long codigoStatus) throws Exception {
 		Pedido pedido = pedidoRepository.findById(codigoPedido)
 				.orElseThrow(() -> new Exception("Pedido não encontrado"));
 
-		switch (StatusPedidoEnum.getEnum(pedido.getCodigoStatus())) {
-
-		case REALIZADO:
-			pedido.setCodigoStatus(StatusPedidoEnum.CONFIRMADO.getCodigo());
-			break;
-
-		case CONFIRMADO:
-			pedido.setCodigoStatus(StatusPedidoEnum.EM_PREPARO.getCodigo());
-			break;
-
-		case EM_PREPARO:
-			pedido.setCodigoStatus(StatusPedidoEnum.EM_ENTREGA.getCodigo());
-			break;
-
-		case EM_ENTREGA:
-			pedido.setCodigoStatus(StatusPedidoEnum.ENTREGUE.getCodigo());
-			break;
-
-		default:
-			break;
-		}
+		pedido.setCodigoStatus(codigoStatus);
 
 		pedidoRepository.save(pedido);
 

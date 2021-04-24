@@ -26,8 +26,9 @@ public interface PedidoController {
 	@GetMapping("/adquirirNaoFinalizados")
 	public ResponseEntity<List<PedidoDTO>> adquirirNaoFinalizados(@RequestHeader(name = "Authorization") String token);
 
-	@PostMapping("/prosseguir")
-	public ResponseEntity<Void> prosseguir(@RequestParam(name = "codigoPedido") Long codigoPedido) throws Exception;
+	@PostMapping("/atualizarStatus")
+	public ResponseEntity<Void> atualizarStatus(@RequestParam(name = "codigoPedido") Long codigoPedido,
+			@RequestParam(name = "codigoStatus") Long codigoStatus) throws Exception;
 
 	@PostMapping("/recusar")
 	public ResponseEntity<Void> recusar(@RequestParam(name = "codigoPedido") Long codigoPedido) throws Exception;

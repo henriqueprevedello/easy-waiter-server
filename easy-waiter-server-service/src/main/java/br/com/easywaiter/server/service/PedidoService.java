@@ -15,7 +15,7 @@ public interface PedidoService {
 
 	List<ListagemPedidoDTO> adquirirTodos(Long codigoCliente);
 
-	void prosseguir(Long codigoPedido) throws Exception;
+	void atualizarStatus(Long codigoPedido, Long codigoStatus) throws Exception;
 
 	void recusar(Long codigoPedido) throws Exception;
 
