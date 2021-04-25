@@ -8,8 +8,8 @@ import br.com.easywaiter.server.repository.domain.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
-	List<Produto> findAllByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByIdDesc(Long codigoEstabelecimento);
+	List<Produto> findAllByCodigoEstabelecimentoAndDataExclusaoIsNullAndAtivoIsTrueOrderByIdDesc(Long codigoEstabelecimento);
 
-	Integer countByCodigoCategoriaAndDataExclusaoIsNull(Long codigoCategoria);
+	Integer countByCodigoCategoriaAndDataExclusaoIsNullAndAtivoIsTrue(Long codigoCategoria);
 
 }

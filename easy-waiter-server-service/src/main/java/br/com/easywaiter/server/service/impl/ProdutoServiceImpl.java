@@ -43,8 +43,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public List<ProdutoDTO> adquirirNaoExcluidos(Long codigoEstabelecimento) {
 
-		return modelMapper.map(produtoRepository.findAllByCodigoEstabelecimentoAndDataExclusaoIsNullOrderByIdDesc(
-				codigoEstabelecimento), TypeToken.getParameterized(List.class, ProdutoDTO.class).getType());
+		return modelMapper.map(produtoRepository
+				.findAllByCodigoEstabelecimentoAndDataExclusaoIsNullAndAtivoIsTrueOrderByIdDesc(codigoEstabelecimento),
+				TypeToken.getParameterized(List.class, ProdutoDTO.class).getType());
 
 	}
 
@@ -64,7 +65,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public Integer adquirirQuantidadeDeProdutosValidosDeUmaCategoria(Long codigoCategoria) {
 
-		return produtoRepository.countByCodigoCategoriaAndDataExclusaoIsNull(codigoCategoria);
+		return produtoRepository.countByCodigoCategoriaAndDataExclusaoIsNullAndAtivoIsTrue(codigoCategoria);
 	}
 
 	@Override
