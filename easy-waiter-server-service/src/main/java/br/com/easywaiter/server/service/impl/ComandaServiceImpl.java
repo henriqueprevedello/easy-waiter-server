@@ -1,5 +1,8 @@
 package br.com.easywaiter.server.service.impl;
 
+import static br.com.easywaiter.server.util.enumerator.StatusPedidoEnum.CANCELADO;
+import static br.com.easywaiter.server.util.enumerator.StatusPedidoEnum.RECUSADO;
+
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
@@ -84,7 +87,9 @@ public class ComandaServiceImpl implements ComandaService {
 	}
 
 	private BigDecimal calcularValorTotal(List<Pedido> pedidos) {
-		return pedidos.stream().map(pedido -> this.calcularValorTotalPedidoItens(pedido.getPedidoItens()))
+		return pedidos.stream().filter(
+				p -> p.getCodigoStatus() != RECUSADO.getCodigo() && p.getCodigoStatus() != CANCELADO.getCodigo())
+				.map(pedido -> this.calcularValorTotalPedidoItens(pedido.getPedidoItens()))
 				.reduce(BigDecimal.ZERO, BigDecimal::add);
 
 	}
@@ -115,6 +120,7 @@ public class ComandaServiceImpl implements ComandaService {
 
 			comandaRepository.save(comanda);
 
+			return;
 		}
 
 		throw new Exception("Comanda não encontrada");

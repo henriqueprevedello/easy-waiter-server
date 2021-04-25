@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Where;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -56,6 +57,7 @@ public class Comanda implements Serializable {
 	private Estabelecimento estabelecimento;
 
 	@OneToMany(mappedBy = "comanda")
+	@Where(clause = "cd_status <> 0 and cd_status <> 1")
 	private List<Pedido> pedidos = new ArrayList<>();
 
 	@Temporal(TemporalType.TIMESTAMP)

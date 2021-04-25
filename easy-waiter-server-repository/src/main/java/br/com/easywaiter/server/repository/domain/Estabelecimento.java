@@ -41,6 +41,9 @@ public class Estabelecimento implements Serializable {
 
 	private String cidade;
 
+	@Column(name = "tx_chavepix")
+	private String chavePix;
+
 	@OneToMany(mappedBy = "estabelecimento", fetch = FetchType.LAZY)
 	private List<Produto> produtos = new ArrayList<>();
 

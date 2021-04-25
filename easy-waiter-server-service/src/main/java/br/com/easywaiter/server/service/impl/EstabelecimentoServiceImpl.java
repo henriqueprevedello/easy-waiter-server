@@ -44,6 +44,7 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 		Estabelecimento estabelecimento = optionalEstabelecimento.get();
 
 		estabelecimento.setDescricao(estabelecimentoDTO.getDescricao());
+		estabelecimento.setChavePix(estabelecimentoDTO.getChavePix());
 		estabelecimento.setNumeroTelefone(estabelecimentoDTO.getNumeroTelefone());
 
 		return modelMapper.map(estabelecimentoRepository.save(estabelecimento), EstabelecimentoDTO.class);
