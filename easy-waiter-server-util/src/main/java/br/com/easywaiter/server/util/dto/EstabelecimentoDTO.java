@@ -24,6 +24,8 @@ public class EstabelecimentoDTO {
 
 	private String cidade;
 
+	private String imagem;
+
 	private String chavePix;
 
 	private List<ProdutoDTO> produtos = new ArrayList<>();

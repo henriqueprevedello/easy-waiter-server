@@ -10,6 +10,8 @@ public interface ProdutoService {
 
 	List<ProdutoDTO> adquirirNaoExcluidos(Long codigoEstabelecimento);
 
+	List<ProdutoDTO> adquirirNaoExcluidosEAtivos(Long codigoEstabelecimento);
+
 	ProdutoDTO adquirir(Long codigoProduto) throws Exception;
 
 	Integer adquirirQuantidadeDeProdutosValidosDeUmaCategoria(Long codigoCategoria);

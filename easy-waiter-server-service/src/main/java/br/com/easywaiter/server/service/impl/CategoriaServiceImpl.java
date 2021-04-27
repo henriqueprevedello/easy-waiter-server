@@ -92,7 +92,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 				categoriaRepository.adquirirCategoriasEProdutosDisponiveis(codigoEstabelecimento),
 				TypeToken.getParameterized(List.class, CategoriaDTO.class).getType());
 
-		List<ProdutoDTO> produtos = produtoService.adquirirNaoExcluidos(codigoEstabelecimento);
+		List<ProdutoDTO> produtos = produtoService.adquirirNaoExcluidosEAtivos(codigoEstabelecimento);
 
 		listaCategoriaDTO.forEach(categoria -> {
 

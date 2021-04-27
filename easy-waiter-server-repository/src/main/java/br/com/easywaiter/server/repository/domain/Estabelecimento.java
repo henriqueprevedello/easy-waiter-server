@@ -41,6 +41,9 @@ public class Estabelecimento implements Serializable {
 
 	private String cidade;
 
+	@Column(name = "tx_imagem")
+	private String imagem;
+
 	@Column(name = "tx_chavepix")
 	private String chavePix;
 
