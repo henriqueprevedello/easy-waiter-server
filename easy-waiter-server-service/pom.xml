@@ -11,7 +11,7 @@
 
 	<artifactId>easy-waiter-server-service</artifactId>
 	<groupId>br.com.easywaiter.server.service</groupId>
-	<name>EasyWaiterServerService</name>
+	<name>easy-waiter-server-service</name>
 	<description>Regras de negócio do EasyWaiterServer</description>
 
 	<dependencies>
@@ -22,16 +22,12 @@
 			<artifactId>easy-waiter-server-repository</artifactId>
 			<groupId>br.com.easywaiter.server.repository</groupId>
 			<version>${br.com.easywaiter.server.version}</version>
-			<scope>provided</scope>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<artifactId>easy-waiter-server-util</artifactId>
 			<groupId>br.com.easywaiter.server.util</groupId>
 			<version>${br.com.easywaiter.server.version}</version>
-			<scope>provided</scope>
-			<optional>true</optional>
 		</dependency>
 		
 		<!-- Spring -->

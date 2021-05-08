@@ -11,8 +11,7 @@
 
 	<artifactId>easy-waiter-server-repository</artifactId>
 	<groupId>br.com.easywaiter.server.repository</groupId>
-	<name>EasyWaiterServerRepository</name>
-	<description>Repositório do EasyWaiterServer</description>
+	<name>easy-waiter-server-repository</name>
 
 	<dependencies>
 	
@@ -22,8 +21,6 @@
 			<artifactId>easy-waiter-server-util</artifactId>
 			<groupId>br.com.easywaiter.server.util</groupId>
 			<version>${br.com.easywaiter.server.version}</version>
-			<scope>provided</scope>
-			<optional>true</optional>
 		</dependency>
 		
 		<!-- Spring -->

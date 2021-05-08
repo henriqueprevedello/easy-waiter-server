@@ -11,8 +11,7 @@
 
 	<artifactId>easy-waiter-server-util</artifactId>
 	<groupId>br.com.easywaiter.server.util</groupId>
-	<name>EasyWaiterServerUtil</name>
-	<description>Classes compartilhadas entre o projeto EasyWaiterServer</description>
+	<name>easy-waiter-server-util</name>
 
 	<dependencies>
 	

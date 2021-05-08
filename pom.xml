@@ -1,33 +1,33 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"															   
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                                            
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">             
-	<modelVersion>4.0.0</modelVersion>                                                                           
-                                                                                                                    
-    <parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.1.RELEASE</version>
-		<relativePath/>
-	</parent>                                                                                              
-                                                                                                                    
-	<packaging>pom</packaging>                                                                                       
-	<groupId>br.com.easywaiter.server</groupId>                                                                               
-	<artifactId>easy-waiter-server</artifactId>                                                                      
-	<version>0.0.1-SNAPSHOT</version>                                                                                     
-	<name>EasyWaiterServer</name>                                                                                      
-	<description>Projeto EasyWaiterServer</description>                                               
-                                                                                                                    
-	<properties>                                                                                                     
-                                                                                                                    
-		<java.version>1.8</java.version>                                                                             
-        <br.com.easywaiter.server.version>0.0.1-SNAPSHOT</br.com.easywaiter.server.version>                                                                            
-                                                                                                                    
-	</properties>                                                                                                    
-                                                                                                                    
-	<modules>                                                                                                        
-		<module>easy-waiter-server-util</module>                                                                     
-		<module>easy-waiter-server-repository</module>                                                               
-		<module>easy-waiter-server-service</module>                                                                  
-		<module>easy-waiter-server-api</module>                                                                      
-	</modules>                                                                                                       
+		<relativePath />
+	</parent>
+
+	<groupId>br.com.easywaiter.server</groupId>
+	<artifactId>easy-waiter-server</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>easy-waiter-server</name>
+	<description>EasyWaiter Server</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<br.com.easywaiter.server.version>0.0.1-SNAPSHOT</br.com.easywaiter.server.version>
+	</properties>
+
+	<modules>
+		<module>easy-waiter-server-util</module>
+		<module>easy-waiter-server-repository</module>
+		<module>easy-waiter-server-service</module>
+		<module>easy-waiter-server-api</module>
+	</modules>
+
 </project>                                                                                                          
