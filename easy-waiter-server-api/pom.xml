@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -11,36 +12,22 @@
 
 	<artifactId>easy-waiter-server-api</artifactId>
 	<groupId>br.com.easywaiter.server.api</groupId>
-	<name>EasyWaiterServerApi</name>
-	<description>Inicialização do EasyWaiterServer</description>
+	<name>easy-waiter-server-api</name>
+	<description>Inicialização do EasyWaiter Server</description>
 
 	<properties>
-		<start-class>easy-waiter-server.Application</start-class>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<start-class>br.com.easywaiter.server.Application</start-class>
 	</properties>
 
 	<dependencies>
 
 		<!-- Dependências internas -->
-		
-		<dependency>
-			<artifactId>easy-waiter-server-repository</artifactId>
-			<groupId>br.com.easywaiter.server.repository</groupId>
-			<version>${br.com.easywaiter.server.version}</version>
-			<scope>provided</scope>
-			<optional>true</optional>
-		</dependency>
 
 		<dependency>
 			<artifactId>easy-waiter-server-service</artifactId>
 			<groupId>br.com.easywaiter.server.service</groupId>
-			<version>${br.com.easywaiter.server.version}</version>
-			<scope>provided</scope>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<artifactId>easy-waiter-server-util</artifactId>
-			<groupId>br.com.easywaiter.server.util</groupId>
 			<version>${br.com.easywaiter.server.version}</version>
 			<scope>provided</scope>
 			<optional>true</optional>
