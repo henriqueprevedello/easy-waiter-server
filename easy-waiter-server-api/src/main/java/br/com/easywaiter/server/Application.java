@@ -1,14 +1,15 @@
 package br.com.easywaiter.server;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
+
+import br.com.easywaiter.server.service.config.ArmazenamentoArquivoProperties;
 
 @SpringBootApplication(scanBasePackages = { "br.com.easywaiter.server.configuration", "br.com.easywaiter.server.api" })
 @PropertySource(value = { "classpath:application.properties" })
-@EnableAutoConfiguration(exclude = { LiquibaseAutoConfiguration.class })
+@EnableConfigurationProperties({ ArmazenamentoArquivoProperties.class })
 public class Application {
 
 	public static void main(String[] args) {
