@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfigurati
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication(scanBasePackages = { "br.com.easywaiter.server.configuration", "br.com.easywaiter.server.api" })
-@PropertySource(ignoreResourceNotFound = false, value = "classpath:application-${spring.profiles.active}.properties")
+@PropertySource(value = { "classpath:application.properties" })
 @EnableAutoConfiguration(exclude = { LiquibaseAutoConfiguration.class })
 public class Application {
 
