@@ -1,4 +1,4 @@
-package br.com.easywaiter.server.api.config.mapping;
+package br.com.easywaiter.server.util.mapping;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
