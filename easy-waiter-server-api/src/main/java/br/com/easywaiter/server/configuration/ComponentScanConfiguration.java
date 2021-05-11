@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Lazy;
 
 @Lazy(false)
 @Configuration(proxyBeanMethods = false)
-@ComponentScan(lazyInit = false, basePackages = { "br.com.easywaiter.server.api" })
+@ComponentScan(lazyInit = false, basePackages = { "br.com.easywaiter.server" })
 public class ComponentScanConfiguration {
 
 }

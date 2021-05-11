@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import br.com.easywaiter.server.service.config.ArmazenamentoArquivoProperties;
 
-@SpringBootApplication(scanBasePackages = { "br.com.easywaiter.server.configuration", "br.com.easywaiter.server.api" })
+@SpringBootApplication
 @PropertySource(value = { "classpath:application.properties" })
 @EnableConfigurationProperties({ ArmazenamentoArquivoProperties.class })
 public class Application {
