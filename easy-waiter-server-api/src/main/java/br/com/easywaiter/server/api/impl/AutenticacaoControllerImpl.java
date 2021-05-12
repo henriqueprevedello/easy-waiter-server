@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easywaiter.server.api.AutenticacaoController;
-import br.com.easywaiter.server.configuration.TokenService;
+import br.com.easywaiter.server.api.config.TokenService;
 import br.com.easywaiter.server.repository.domain.Usuario;
 import br.com.easywaiter.server.util.dto.AutenticacaoDTO;
 import br.com.easywaiter.server.util.dto.UsuarioDTO;

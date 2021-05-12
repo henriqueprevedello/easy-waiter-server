@@ -1,4 +1,4 @@
-package br.com.easywaiter.server.configuration;
+package br.com.easywaiter.server.api.config;
 
 import org.springframework.stereotype.Service;
 

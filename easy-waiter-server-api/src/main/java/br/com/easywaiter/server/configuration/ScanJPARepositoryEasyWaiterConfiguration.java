@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration(proxyBeanMethods = false)
 @EnableJpaRepositories(basePackages = { "br.com.easywaiter.server.repository.jpa" })
 @EntityScan(basePackages = { "br.com.easywaiter.server.repository.domain" })
-public class ScanJPARepositoryConfiguration {
+public class ScanJPARepositoryEasyWaiterConfiguration {
 
 }

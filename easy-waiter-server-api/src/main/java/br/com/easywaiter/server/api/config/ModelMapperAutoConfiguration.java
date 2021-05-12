@@ -1,21 +1,18 @@
 package br.com.easywaiter.server.api.config;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 import br.com.easywaiter.server.util.modelMapper.ModelMapperFactoryBean;
 
+@Lazy(false)
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(ModelMapper.class)
 public class ModelMapperAutoConfiguration {
 
-    @Bean
-    @ConditionalOnMissingBean(ModelMapperFactoryBean.class)
-    public ModelMapperFactoryBean modelMapperFactoryBean() {
+	@Bean
+	public ModelMapperFactoryBean modelMapperFactoryBean() {
 
-        return new ModelMapperFactoryBean();
-    }
+		return new ModelMapperFactoryBean();
+	}
 }
