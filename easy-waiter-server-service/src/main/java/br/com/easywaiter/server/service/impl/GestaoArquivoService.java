@@ -15,18 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.easywaiter.server.service.config.ArmazenamentoArquivoProperties;
-
 @Service
 public class GestaoArquivoService {
 
-	private final Path diretorioUploads;
+	private final Path diretorioUploads = Paths.get("/uploads").toAbsolutePath().normalize();
 
 	@Autowired(required = true)
-	public GestaoArquivoService(ArmazenamentoArquivoProperties armazenamentoArquivoProperties) throws Exception {
-
-		this.diretorioUploads = Paths.get(armazenamentoArquivoProperties.getDiretorioUploads()).toAbsolutePath()
-				.normalize();
+	public GestaoArquivoService() throws Exception {
 
 		try {
 			Files.createDirectories(this.diretorioUploads);
