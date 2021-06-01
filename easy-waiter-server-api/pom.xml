@@ -29,9 +29,14 @@
 			<artifactId>easy-waiter-server-service</artifactId>
 			<groupId>br.com.easywaiter.server.service</groupId>
 			<version>${br.com.easywaiter.server.version}</version>
-			<scope>provided</scope>
-			<optional>true</optional>
 		</dependency>
+		
+		<dependency>
+			<artifactId>easy-waiter-server-util</artifactId>
+			<groupId>br.com.easywaiter.server.util</groupId>
+			<version>${br.com.easywaiter.server.version}</version>
+		</dependency>
+	
 
 		<!-- Dependência para o Spring Boot -->
 		
@@ -129,6 +134,18 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.modelmapper</groupId>
+		  <artifactId>modelmapper</artifactId>
+		  <version>2.3.8</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.modelmapper.extensions</groupId>
+		    <artifactId>modelmapper-spring</artifactId>
+		    <version>2.3.8</version>
 		</dependency>
 
 	</dependencies>

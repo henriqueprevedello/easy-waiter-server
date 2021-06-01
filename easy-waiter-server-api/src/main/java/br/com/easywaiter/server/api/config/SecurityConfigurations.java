@@ -19,13 +19,14 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import br.com.easywaiter.server.repository.jpa.UsuarioRepository;
+import br.com.easywaiter.server.service.impl.TokenService;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private AutenticacaoService autenticacaoService;
+	private AutenticacaoServiceImpl autenticacaoService;
 
 	@Autowired
 	private TokenService tokenService;

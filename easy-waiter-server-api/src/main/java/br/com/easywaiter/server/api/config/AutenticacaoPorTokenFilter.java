@@ -13,6 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.easywaiter.server.repository.domain.Usuario;
 import br.com.easywaiter.server.repository.jpa.UsuarioRepository;
+import br.com.easywaiter.server.service.impl.TokenService;
 
 public class AutenticacaoPorTokenFilter extends OncePerRequestFilter {
 
@@ -50,7 +51,5 @@ public class AutenticacaoPorTokenFilter extends OncePerRequestFilter {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
-
-	
 
 }

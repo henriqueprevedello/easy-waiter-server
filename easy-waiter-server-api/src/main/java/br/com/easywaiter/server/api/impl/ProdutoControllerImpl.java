@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easywaiter.server.api.ProdutoController;
-import br.com.easywaiter.server.api.config.TokenService;
 import br.com.easywaiter.server.service.ProdutoService;
+import br.com.easywaiter.server.service.impl.TokenService;
 import br.com.easywaiter.server.util.dto.ProdutoDTO;
 
 @RestController

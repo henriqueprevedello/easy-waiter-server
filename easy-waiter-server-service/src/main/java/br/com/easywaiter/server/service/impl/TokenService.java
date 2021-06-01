@@ -1,4 +1,4 @@
-package br.com.easywaiter.server.api.config;
+package br.com.easywaiter.server.service.impl;
 
 import java.util.Date;
 

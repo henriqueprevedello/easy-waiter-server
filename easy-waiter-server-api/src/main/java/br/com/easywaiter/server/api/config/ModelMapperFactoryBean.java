@@ -1,4 +1,4 @@
-package br.com.easywaiter.server.util.modelMapper;
+package br.com.easywaiter.server.api.config;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.easywaiter.server.util.modelMapper.ModelMapperConfigurer;
 
 public class ModelMapperFactoryBean implements FactoryBean<ModelMapper> {
 
