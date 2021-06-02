@@ -21,6 +21,8 @@ public class ProdutoDTO {
 
 	private CategoriaDTO categoria;
 
+	private Long codigoCategoria;
+
 	private String imagem;
 
 }

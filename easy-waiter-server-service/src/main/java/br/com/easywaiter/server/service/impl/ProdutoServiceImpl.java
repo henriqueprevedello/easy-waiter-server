@@ -33,7 +33,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		produto.setDescricao(produtoDTO.getDescricao());
 		produto.setValor(produtoDTO.getValor());
 		produto.setAtivo(produtoDTO.getAtivo());
-		produto.setCodigoCategoria(produtoDTO.getCategoria().getId());
+		produto.setCodigoCategoria(produtoDTO.getCodigoCategoria());
 		produto.setCodigoEstabelecimento(codigoEstabelecimento);
 		produto.setImagem(produtoDTO.getImagem());
 
@@ -102,7 +102,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		produto.setNome(produtoDTO.getNome());
 		produto.setDescricao(produtoDTO.getDescricao());
 		produto.setAtivo(produtoDTO.getAtivo());
-		produto.setCodigoCategoria(produtoDTO.getCategoria().getId());
+		produto.setCodigoCategoria(produtoDTO.getCodigoCategoria());
 		produto.setValor(produtoDTO.getValor());
 
 		if (produtoDTO.getImagem() != null) {
